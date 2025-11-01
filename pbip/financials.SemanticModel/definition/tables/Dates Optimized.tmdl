@@ -1,0 +1,161 @@
+table 'Dates Optimized'
+	lineageTag: bf8abd8f-b13e-4b80-af81-0a4a38a2e8c5
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: yyyy mmm
+		lineageTag: b29d392a-bcc3-4907-b175-d83d9283d018
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column Year
+		formatString: 0
+		lineageTag: b33a08bc-3bf1-487f-a5be-50eeaca9a4cb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		lineageTag: 4fffbb91-5d53-43ff-ab3a-da66cd1dc126
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		formatString: 0
+		lineageTag: bf807ac2-1326-46d5-ac9e-80f1b1d6f958
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		lineageTag: 823132d4-b4aa-44e1-88a0-1258f332427a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Name]
+		sortByColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name Full'
+		lineageTag: 62f63579-cf32-4799-a2b4-79f99140f288
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Name Full]
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonthKey
+		lineageTag: 4a2d074a-a8bc-4b42-9796-bad4280d4788
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [YearMonthKey]
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Date Hierarchy'
+		lineageTag: 38b42c68-f589-47e9-8542-5608da7e479b
+
+		level Year
+			lineageTag: 1bd49686-846d-46c7-bcda-515bbade351d
+			column: Year
+
+		level Quarter
+			lineageTag: c42f4dc4-7b0b-461a-ae5e-fa8b64fd3849
+			column: Quarter
+
+		level 'Month Name'
+			lineageTag: b3d4929b-2e97-4cf6-9047-7ee337913062
+			column: 'Month Name'
+
+		level Date
+			lineageTag: 4fb2db0d-07df-429d-82b9-3de340ce67aa
+			column: Date
+
+	partition 'Dates Optimized' = calculated
+		mode: import
+		source = ```
+				
+				/*
+				    Business Goal: Creates a complete calendar dimension table (Date Table)
+				    based on the minimum and maximum transaction dates from the financials table,
+				    enriched with essential columns for filtering, sorting, and time intelligence
+				    calculations. This optimized date dimension serves as the foundation for
+				    all time-based analysis and reporting throughout the data model.
+				
+				    Function Explanation:
+				    VAR: Used to declare variables that store intermediate calculation results.
+				    This improves performance and code readability.
+				*/
+				VAR StartDate = 
+				    /*
+				        MIN: Returns the smallest (earliest) date from the financials[Date] column.
+				        This establishes the starting point for the calendar dimension, ensuring
+				        it covers the entire range of transactional data.
+				    */
+				    MIN ( financials[Date] )
+				VAR EndDate = 
+				    /*
+				        MAX: Returns the largest (latest) date from the financials[Date] column.
+				        This establishes the ending point for the calendar dimension, ensuring
+				        it covers the entire range of transactional data.
+				    */
+				    MAX ( financials[Date] )
+				VAR Calendar =
+				    /*
+				        ADDCOLUMNS: Adds calculated columns to a table expression.
+				        CALENDAR: Generates a continuous table of dates between the start and end dates.
+				        This creates the foundation date table with one row per date.
+				    */
+				    ADDCOLUMNS (
+				        CALENDAR ( StartDate, EndDate ),
+				        /*
+				            YEAR: Extracts the year component from the date as a four-digit number.
+				            Used for yearly filtering, grouping, and hierarchy building.
+				        */
+				        "Year", YEAR ( [Date] ),
+				        /*
+				            QUARTER: Extracts the quarter number (1-4) from the date.
+				            Concatenated with "Q" prefix for readable quarter labels.
+				        */
+				        "Quarter", "Q" & QUARTER ( [Date] ),
+				        /*
+				            MONTH: Extracts the month number (1-12) from the date.
+				            Used for monthly calculations and numeric sorting.
+				        */
+				        "Month", MONTH ( [Date] ),
+				        /*
+				            FORMAT with "mmm": Returns the abbreviated month name (Jan, Feb, Mar, etc.).
+				            Provides short, user-friendly month labels for compact reports and charts.
+				        */
+				        "Month Name", FORMAT ( [Date], "mmm" ),
+				        /*
+				            FORMAT with "mmmm": Returns the full month name (January, February, March, etc.).
+				            Used for detailed reporting and comprehensive date labeling.
+				        */
+				        "Month Name Full", FORMAT ( [Date], "mmmm" ),
+				        /*
+				            FORMAT with "YYYYMM": Creates a numeric year-month key (e.g., 202401 for Jan 2024).
+				            CRITICAL SORTING KEY: This column is essential for proper chronological sorting
+				            of month names and quarters in reports, preventing alphabetical sorting issues.
+				        */
+				        "YearMonthKey", FORMAT ( [Date], "YYYYMM" )
+				    )
+				RETURN
+				    Calendar
+				```
+
+	annotation PBI_Id = 6fa1f19cca39458593a0238df993ff56
+
