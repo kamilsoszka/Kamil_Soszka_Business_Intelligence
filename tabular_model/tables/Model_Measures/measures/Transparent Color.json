@@ -1,0 +1,31 @@
+{
+  "name": "Transparent Color",
+  "expression": [
+    "",
+    "/*",
+    "    Business Goal: Returns a constant HEX color code value (#RRGGBBAA) ",
+    "    representing a fully transparent color. This measure is used for ",
+    "    conditional formatting to hide visual elements or make their background transparent.",
+    "    ",
+    "    The color code follows the 8-digit HEX format:",
+    "    - First 6 digits: RRGGBB (Red, Green, Blue components)",
+    "    - Last 2 digits: AA (Alpha channel for transparency)",
+    "    ",
+    "    Format Breakdown:",
+    "    - \"#FFFFFF\": Solid White color (Red=FF, Green=FF, Blue=FF)",
+    "    - \"00\": Fully transparent Alpha channel (0% opacity)",
+    "    ",
+    "    Use Cases:",
+    "    - Hiding data labels when not needed",
+    "    - Making chart backgrounds transparent",
+    "    - Conditional formatting to show/hide elements based on business rules",
+    "    - Creating invisible placeholders in visual layouts",
+    "    ",
+    "    This measure returns a text value that can be used directly in",
+    "    conditional formatting rules for font color, background color, etc.",
+    "*/",
+    "\"#FFFFFF00\""
+  ],
+  "displayFolder": "other measures",
+  "lineageTag": "8bbc22ee-1672-4409-a8b1-32eddc6cc9bb"
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Month Name Full",
+  "dataType": "string",
+  "sourceColumn": "Month Name Full",
+  "sourceProviderType": "nvarchar",
+  "lineageTag": "11f9c074-8412-4937-bdfe-64839f165d2a"
+}

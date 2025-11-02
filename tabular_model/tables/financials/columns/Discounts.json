@@ -1,0 +1,7 @@
+{
+  "name": "Discounts",
+  "dataType": "double",
+  "sourceColumn": "Discounts",
+  "sourceProviderType": "float",
+  "lineageTag": "797a7921-7b49-44f6-8a1d-c2eb2792feff"
+}
