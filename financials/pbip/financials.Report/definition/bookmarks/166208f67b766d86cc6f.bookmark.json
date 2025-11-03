@@ -1,0 +1,1746 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.4.0/schema.json",
+  "displayName": "smoothed slicers",
+  "name": "166208f67b766d86cc6f",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "fa4322c2ecdbb9117e97",
+      "9194a33883517b80e781",
+      "36241e885fd39206be15",
+      "a79b32af2c990ebf2a6a",
+      "e4d64b59b60a98644f8f",
+      "032f0625e286ab1a8648",
+      "91c2cf47eae768f7b014",
+      "f43bdbc206166b381c51",
+      "93e42f14ee579acd68d6"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "b94d88d795839716fba7",
+    "filters": {
+      "byExpr": [
+        {
+          "name": "4fac1e830f39836b58a2",
+          "type": "Categorical",
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "financials"
+                }
+              },
+              "Property": "Year"
+            }
+          },
+          "howCreated": 1
+        }
+      ]
+    },
+    "sections": {
+      "b94d88d795839716fba7": {
+        "visualContainers": {
+          "ecab564de85177888fbc": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "290c1659d167a2643d80",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dates Optimized"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "d9803f7d82ac36fe6707",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Sales"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "98cf99fb34baf9a552da",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Max Sales Optimized"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "1fa2de84e4daa019d93d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Min Sales Optimized"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "lineChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dates Optimized"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dates Optimized"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "660e163e7f8bd537c902": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "751ef44eb4335ebfb992",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "4a3150bd59dc374c1a66",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Sales"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredColumnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Sales"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "0e7857f4b6184bd5224a": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "b739bcaf460817879611",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Segment"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "97077ce2438921ccd0b3",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Sales"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Sales"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Segment"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a0e28b2f36798bec5093": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "f51bfb04443388b3c591": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "68fd9b7867f518a552e0",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Sales"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Sales"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "3a28d2e05501e7692bd4": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "ee3a6595588aefe7b9da": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ea817f18b604a91f4420",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Sales KPI Optimized"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "2027ee5b74438819cc02": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "9a9fab46c2c84d46d50b": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "c5c05b6817b44cceaeb8": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "bffec203d45e4da76ae6": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "953e399557ff5eb61729": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ab89e9adab75543fb49d",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Segment"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "f4c393b3eabfe319ea89",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Profit"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Profit"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Segment"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "d8180afdad3f78b553ff": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "678547dcee16c8fdd6ba",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Profit KPI Optimized"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "fb574e118fb0ec06c3bd": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7daf8b75501d38145a08",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Profit"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Profit"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "117b000ae5f4e3b8c253": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "d70bb8115dbb90ebda60": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "a2202f84e164862c6aa1": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "09b00b30feb38b0bb67c",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dates Optimized"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "370c05dd7a471346494b",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Profit"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "1e3917d71e8840091026",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Max Profit Optimized"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "df935aa763bb05608dac",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Min Profit Optimized"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "lineChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dates Optimized"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dates Optimized"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "f4aaa71cc4c27565e34a": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ea8cde5b12a8702e88b3",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "009d2bcd2f8b2f05bd33",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Profit"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredColumnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Profit"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "9194a33883517b80e781": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "36241e885fd39206be15": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "a79b32af2c990ebf2a6a": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ff2ab0811042ecb71404",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dates Optimized"
+                        }
+                      },
+                      "Property": "Year"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "d",
+                                "Entity": "Dates Optimized",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "Year"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "2014L"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "selection": [
+                    {
+                      "properties": {
+                        "strictSingleSelect": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "true"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dates Optimized"
+                        }
+                      },
+                      "Property": "Year"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "e4d64b59b60a98644f8f": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "43679d8308c333ecdff5",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Country"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "f",
+                                "Entity": "financials",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "f"
+                                            }
+                                          },
+                                          "Property": "Country"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'Canada'"
+                                          }
+                                        }
+                                      ],
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'United States of America'"
+                                          }
+                                        }
+                                      ],
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'Mexico'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "selection": [
+                    {
+                      "properties": {
+                        "strictSingleSelect": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "false"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Country"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "032f0625e286ab1a8648": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "1cad134d343894d349af",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Discount Band"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "f",
+                                "Entity": "financials",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "f"
+                                            }
+                                          },
+                                          "Property": "Discount Band"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'High'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "selection": [
+                    {
+                      "properties": {
+                        "strictSingleSelect": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "true"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Discount Band"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "91c2cf47eae768f7b014": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "f43bdbc206166b381c51": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "93e42f14ee579acd68d6": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "27e562e1c22a341caea8": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "b755236422d1fa23e7d0",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "fce51e299ad14c6bc3aa",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "COGS"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredColumnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "COGS"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "e1ec04e388adad6e3e75": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "6bc3236b516c0374a3ae": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "7e3f4f6d3d178e7d7a69": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "301816be78d3b0f4b64e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "COGS"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "COGS"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "2f3307491e3cc0627265": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "65373f8b4a9428935c05",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "COGS KPI Optimized"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "c4c87a6c030197474711": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "696faca0f106745c623d",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Segment"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "6e77490e246b18975072",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "COGS"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "COGS"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Segment"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "305408a2cc1279fbdacc": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "1a6e71e16b762ee7b03d",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dates Optimized"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "722da5a09e6bec3c2de7",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "COGS"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "1c3e5158a0378c7c31b5",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Max COGS Optimized"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "acbc20b20233b644a5af",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Min COGS Optimized"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "lineChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dates Optimized"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dates Optimized"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "df513631d2a0add35d54": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "5648a03eb42415934155",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Units Sold KPI Optimized"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "2bd48307c43dc2172670": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "70563a6e058b41c0bf08": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7ca174a75590f6dd0fac",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Units Sold"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Units Sold"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "f4a0c3314a4a336ccf2d": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "ab503562dd9912cc1f9c": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "3a39849cfb6714bfe105",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Segment"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "9e82b0a9a93c6a3fbf6c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Units Sold"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredBarChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Units Sold"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Segment"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "295d788b48a1c06c38f5": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "4e7eb45cc249bacc4b47",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dates Optimized"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "0d777d7919b9fc13e7f1",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Units Sold"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "27cfd307441f5bb68ef4",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Max Units Sold Optimized"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "152356fdd3ace4c849e2",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Min Units Sold Optimized"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "lineChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dates Optimized"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dates Optimized"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "f69bfc3d1450d65c15ed": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "90e435cb83b712cc889b",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "bb52920901b1dda8b02d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Units Sold"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredColumnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Model_Measures"
+                        }
+                      },
+                      "Property": "Units Sold"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "financials"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "a121fce8450bcf42c55f": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          }
+        },
+        "visualContainerGroups": {
+          "fa4322c2ecdbb9117e97": {
+            "isHidden": false
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

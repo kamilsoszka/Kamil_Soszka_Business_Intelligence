@@ -1,52 +1,60 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
-  "name": "e6a6b956fb1125007c97",
+  "name": "c5c05b6817b44cceaeb8",
   "position": {
-    "x": 7,
-    "y": 666,
-    "z": 1500,
-    "height": 45,
-    "width": 45
+    "x": 0,
+    "y": 10,
+    "z": 2500,
+    "height": 60,
+    "width": 60,
+    "tabOrder": 1000
   },
   "visual": {
-    "visualType": "actionButton",
+    "visualType": "image",
     "objects": {
-      "icon": [
+      "general": [
         {
           "properties": {
-            "shapeType": {
+            "imageUrl": {
               "expr": {
-                "Literal": {
-                  "Value": "'help'"
-                }
-              }
-            },
-            "lineColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#E6E6E6'"
-                    }
-                  }
-                }
-              }
-            },
-            "lineWeight": {
-              "expr": {
-                "Literal": {
-                  "Value": "2L"
+                "ResourcePackageItem": {
+                  "PackageName": "RegisteredResources",
+                  "PackageType": 1,
+                  "ItemName": "chess5929082057878752.png"
                 }
               }
             }
-          },
-          "selector": {
-            "id": "default"
           }
         }
       ]
     },
     "visualContainerObjects": {
+      "lockAspect": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'IMAGE_CHESS'"
+                }
+              }
+            }
+          }
+        }
+      ],
       "visualLink": [
         {
           "properties": {
@@ -65,20 +73,7 @@
                       "Entity": "Model_Measures"
                     }
                   },
-                  "Property": "Current Time UTC"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "title": [
-        {
-          "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'BUTTON_HELP'"
+                  "Property": "DumpFilters"
                 }
               }
             }
@@ -88,6 +83,6 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "b36b2a5459117823bf4e",
+  "parentGroupName": "14f29c1dee1fc91d249a",
   "howCreated": "InsertVisualButton"
 }

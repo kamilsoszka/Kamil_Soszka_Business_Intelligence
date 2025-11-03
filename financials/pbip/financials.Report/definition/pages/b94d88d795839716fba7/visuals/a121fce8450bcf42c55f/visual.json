@@ -1,0 +1,97 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "a121fce8450bcf42c55f",
+  "position": {
+    "x": 0,
+    "y": 575,
+    "z": 1750,
+    "height": 60,
+    "width": 60,
+    "tabOrder": 7001
+  },
+  "visual": {
+    "visualType": "image",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "imageUrl": {
+              "expr": {
+                "ResourcePackageItem": {
+                  "PackageName": "RegisteredResources",
+                  "PackageType": 1,
+                  "ItemName": "switch-off2570473480057308.png"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "lockAspect": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualLink": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Toggle Trend View'"
+                }
+              }
+            },
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'PageNavigation'"
+                }
+              }
+            },
+            "navigationSection": {
+              "expr": {
+                "Literal": {
+                  "Value": "'648a6f10e1e11f278a56'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'IMAGE_STEP'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "14f29c1dee1fc91d249a",
+  "howCreated": "InsertVisualButton"
+}

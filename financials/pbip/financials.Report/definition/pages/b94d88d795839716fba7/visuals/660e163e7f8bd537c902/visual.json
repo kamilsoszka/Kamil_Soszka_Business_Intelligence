@@ -1,0 +1,291 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "660e163e7f8bd537c902",
+  "position": {
+    "x": 10.586880249170544,
+    "y": 512.66666666666674,
+    "z": 0,
+    "height": 180.34090909090909,
+    "width": 269.9595170454545,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "financials"
+                    }
+                  },
+                  "Property": "Product"
+                }
+              },
+              "queryRef": "financials.Product",
+              "nativeQueryRef": "Product",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Model_Measures"
+                    }
+                  },
+                  "Property": "Sales"
+                }
+              },
+              "queryRef": "Model_Measures.Sales",
+              "nativeQueryRef": "Sales"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Model_Measures"
+                  }
+                },
+                "Property": "Sales"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "valueAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "FillRule": {
+                      "Input": {
+                        "Aggregation": {
+                          "Expression": {
+                            "Column": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Entity": "financials"
+                                }
+                              },
+                              "Property": "Product"
+                            }
+                          },
+                          "Function": 5
+                        }
+                      },
+                      "FillRule": {
+                        "linearGradient3": {
+                          "min": {
+                            "color": {
+                              "Literal": {
+                                "Value": "'minColor'"
+                              }
+                            }
+                          },
+                          "mid": {
+                            "color": {
+                              "Literal": {
+                                "Value": "'midColor'"
+                              }
+                            }
+                          },
+                          "max": {
+                            "color": {
+                              "Literal": {
+                                "Value": "'maxColor'"
+                              }
+                            }
+                          },
+                          "nullColoringStrategy": {
+                            "strategy": {
+                              "Literal": {
+                                "Value": "'asZero'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "legend": [
+        {
+          "properties": {
+            "showGradientLegend": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'CHART_SALES_PRODUCT'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "section": {
+              "expr": {
+                "Literal": {
+                  "Value": "'966962ce4de7c48b6b50'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "8444b4112d8a29034d20"
+}

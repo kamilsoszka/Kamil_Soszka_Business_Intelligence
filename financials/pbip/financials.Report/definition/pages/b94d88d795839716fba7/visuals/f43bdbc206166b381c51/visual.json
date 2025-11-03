@@ -1,0 +1,63 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "f43bdbc206166b381c51",
+  "position": {
+    "x": 64,
+    "y": 51.999999999999986,
+    "z": 6000,
+    "height": 64,
+    "width": 80,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "image",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "imageUrl": {
+              "expr": {
+                "ResourcePackageItem": {
+                  "PackageName": "RegisteredResources",
+                  "PackageType": 1,
+                  "ItemName": "settings_8414256242367786005977.png"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "lockAspect": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'IMAGE_GEAR_WHEEL'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "fa4322c2ecdbb9117e97",
+  "howCreated": "InsertVisualButton"
+}

@@ -1,0 +1,90 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "9a9fab46c2c84d46d50b",
+  "position": {
+    "x": 0,
+    "y": 130,
+    "z": 2000,
+    "height": 45,
+    "width": 60
+  },
+  "visual": {
+    "visualType": "image",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "imageUrl": {
+              "expr": {
+                "ResourcePackageItem": {
+                  "PackageName": "RegisteredResources",
+                  "PackageType": 1,
+                  "ItemName": "filter8175651502441127.png"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "visualLink": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bookmark'"
+                }
+              }
+            },
+            "navigationSection": {
+              "expr": {
+                "Literal": {
+                  "Value": "'fe4b534a41a2893f863f'"
+                }
+              }
+            },
+            "bookmark": {
+              "expr": {
+                "Literal": {
+                  "Value": "'166208f67b766d86cc6f'"
+                }
+              }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Show all slicers'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'IMAGE_SLICER'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "14f29c1dee1fc91d249a",
+  "howCreated": "InsertVisualButton"
+}

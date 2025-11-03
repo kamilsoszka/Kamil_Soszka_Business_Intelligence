@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.4.0/schema.json",
-  "displayName": "filters",
+  "displayName": "step trend slicers",
   "name": "bbea6c571e0fe55b525c",
   "options": {
     "applyOnlyToTargetVisuals": true,
