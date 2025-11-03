@@ -1,7 +1,0 @@
-{
-  "name": "e1b6124d-2b7b-4db7-814a-a8b9548f0e70",
-  "fromTable": "financials",
-  "fromColumn": "Date",
-  "toTable": "Dates Optimized",
-  "toColumn": "Date"
-}

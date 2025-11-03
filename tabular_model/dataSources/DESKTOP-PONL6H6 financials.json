@@ -1,6 +1,0 @@
-{
-  "name": "DESKTOP-PONL6H6 financials",
-  "connectionString": "data source=DESKTOP-PONL6H6;initial catalog=financials;user id=sa;password=********",
-  "impersonationMode": "impersonateServiceAccount",
-  "provider": "System.Data.SqlClient"
-}

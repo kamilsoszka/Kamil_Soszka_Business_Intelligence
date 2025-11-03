@@ -1,7 +1,0 @@
-{
-  "name": "Sale Price",
-  "dataType": "int64",
-  "sourceColumn": "Sale Price",
-  "sourceProviderType": "bigint",
-  "lineageTag": "4562d8a3-0124-4fad-a3f0-2bcd5d8fabd9"
-}

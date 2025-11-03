@@ -1,7 +1,0 @@
-{
-  "name": "Manufacturing Price",
-  "dataType": "int64",
-  "sourceColumn": "Manufacturing Price",
-  "sourceProviderType": "bigint",
-  "lineageTag": "3eaec26d-f106-43be-8a56-2d98b454f9c9"
-}

@@ -1,8 +1,0 @@
-{
-  "name": "Value",
-  "dataType": "string",
-  "isHidden": true,
-  "sourceColumn": "Value",
-  "sourceProviderType": "nvarchar",
-  "lineageTag": "d3823e54-79ce-4fdd-9824-dc0f21432d9a"
-}

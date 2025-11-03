@@ -1,7 +1,0 @@
-{
-  "name": "COGS",
-  "dataType": "double",
-  "sourceColumn": "COGS",
-  "sourceProviderType": "float",
-  "lineageTag": "bd71f548-e2d7-4e88-96c4-508b0ab23174"
-}

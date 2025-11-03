@@ -1,7 +1,0 @@
-{
-  "name": "Segment",
-  "dataType": "string",
-  "sourceColumn": "Segment",
-  "sourceProviderType": "nvarchar",
-  "lineageTag": "85011323-32d5-48d8-859e-64b4fc8e61f1"
-}

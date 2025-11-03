@@ -1,7 +1,0 @@
-{
-  "name": "Month Number",
-  "dataType": "int64",
-  "sourceColumn": "Month Number",
-  "sourceProviderType": "bigint",
-  "lineageTag": "19dcec35-c7b8-486d-b42a-b3df42a3652c"
-}
