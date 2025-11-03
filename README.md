@@ -22,7 +22,9 @@ Check the `docs/` folder for tutorials and the `pbit/` folder for template examp
 
 <img width="1918" height="817" alt="image" src="https://github.com/user-attachments/assets/5b5ae154-7895-4c74-be86-1b6429cfb770" />
 
-<img width="1918" height="807" alt="image" src="https://github.com/user-attachments/assets/e41ccb92-9c89-4963-af64-071097be7e6e" />
+<img width="1918" height="807" alt="image" src="https://github.com/user-attachments/assets/c92e89c4-97e8-4d44-9cc9-746efe306c7e" />
+
+
 
 
 
