@@ -22,6 +22,6 @@ Check the `docs/` folder for tutorials and the `pbit/` folder for template examp
 
 <img width="1918" height="810" alt="image" src="https://github.com/user-attachments/assets/a8d92739-19a4-4a0b-aa55-114bcba111e7" />
 
-link: https://shorturl.at/DbMSk
+
 
 
