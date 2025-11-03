@@ -20,7 +20,9 @@ This collection serves as a learning resource for Microsoft Power BI, containing
 ## 🚀 Getting Started
 Check the `docs/` folder for tutorials and the `pbit/` folder for template examples to begin your learning journey.
 
-<img width="1918" height="810" alt="image" src="https://github.com/user-attachments/assets/a8d92739-19a4-4a0b-aa55-114bcba111e7" />
+<img width="1918" height="817" alt="image" src="https://github.com/user-attachments/assets/5b5ae154-7895-4c74-be86-1b6429cfb770" />
+
+
 
 
 
