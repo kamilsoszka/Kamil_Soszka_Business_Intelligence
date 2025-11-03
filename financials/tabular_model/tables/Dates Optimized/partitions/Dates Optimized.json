@@ -1,0 +1,19 @@
+{
+  "name": "Dates Optimized",
+  "source": {
+    "type": "query",
+    "query": [
+      "SELECT",
+      "\t*",
+      "FROM",
+      "\t[dbo].[Dates Optimized]"
+    ],
+    "dataSource": "DESKTOP-PONL6H6 financials"
+  },
+  "annotations": [
+    {
+      "name": "TabularEditor_TableSchema",
+      "value": "{\"Name\":\"Dates Optimized\",\"Schema\":\"dbo\",\"Database\":\"financials\",\"IncludedColumns\":[\"Date\",\"Year\",\"Quarter\",\"Month\",\"Month Name\",\"Month Name Full\",\"YearMonthKey\"],\"SelectAll\":true}"
+    }
+  ]
+}

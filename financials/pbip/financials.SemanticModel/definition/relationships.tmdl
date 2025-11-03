@@ -1,0 +1,4 @@
+relationship 33a576f6-68ff-af80-a567-7cc9aa4fc9e2
+	fromColumn: financials.Date
+	toColumn: 'Dates Optimized'.Date
+

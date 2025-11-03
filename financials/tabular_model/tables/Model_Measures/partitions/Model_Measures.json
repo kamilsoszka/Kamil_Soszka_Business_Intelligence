@@ -1,0 +1,19 @@
+{
+  "name": "Model_Measures",
+  "source": {
+    "type": "query",
+    "query": [
+      "SELECT",
+      "\t*",
+      "FROM",
+      "\t[dbo].[Model_Measures]"
+    ],
+    "dataSource": "DESKTOP-PONL6H6 financials"
+  },
+  "annotations": [
+    {
+      "name": "TabularEditor_TableSchema",
+      "value": "{\"Name\":\"Model_Measures\",\"Schema\":\"dbo\",\"Database\":\"financials\",\"IncludedColumns\":[\"Value\",\"Value\"],\"SelectAll\":true}"
+    }
+  ]
+}

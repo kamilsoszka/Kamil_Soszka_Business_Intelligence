@@ -1,0 +1,7 @@
+{
+  "name": "Profit",
+  "dataType": "double",
+  "sourceColumn": "Profit",
+  "sourceProviderType": "float",
+  "lineageTag": "cb029d55-f311-4ad7-a1ac-31f7025c548b"
+}

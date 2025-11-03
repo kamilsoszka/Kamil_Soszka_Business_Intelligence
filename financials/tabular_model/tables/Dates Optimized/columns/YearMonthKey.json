@@ -1,0 +1,7 @@
+{
+  "name": "YearMonthKey",
+  "dataType": "string",
+  "sourceColumn": "YearMonthKey",
+  "sourceProviderType": "nvarchar",
+  "lineageTag": "924b73bd-604e-446f-b402-0448034b53ce"
+}

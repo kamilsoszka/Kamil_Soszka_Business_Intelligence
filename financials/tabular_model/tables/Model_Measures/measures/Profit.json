@@ -1,0 +1,28 @@
+{
+  "name": "Profit",
+  "expression": [
+    "",
+    "/*",
+    "    Business Goal: Establishes a base aggregate measure for the total Profit",
+    "    by summing the values from the 'financials[Profit]' column.",
+    "    This is a fundamental metric that serves as the foundation for further",
+    "    analytical calculations, KPIs, and comparative analysis throughout the report.",
+    "",
+    "    Function Explanation:",
+    "    SUM: A basic aggregation function that returns the sum of all the numbers",
+    "    in the specified column. It operates within the current filter context,",
+    "    meaning it will automatically adjust based on any filters, slicers, or",
+    "    visual context applied in the report.",
+    "",
+    "    This measure is typically used as:",
+    "    - A standalone KPI for overall profitability",
+    "    - A base for time intelligence calculations (YoY, MTD, QTD)",
+    "    - A numerator or denominator in ratio calculations",
+    "    - A core metric for conditional formatting and visualizations",
+    "*/",
+    "SUM ( financials[Profit] )"
+  ],
+  "formatString": "$ #,##0.00",
+  "displayFolder": "profit",
+  "lineageTag": "b0d611d3-448c-48fa-94b8-978f359b56ac"
+}
