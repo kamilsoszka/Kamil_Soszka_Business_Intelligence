@@ -4,7 +4,7 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 0,
+        "x": 711.22222222222217,
         "y": 0
       },
       "nodes": [
@@ -40,6 +40,54 @@
             "y": 0
           },
           "nodeIndex": "Dates Optimized",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 663,
+            "y": 131.5
+          },
+          "nodeIndex": "INFO.VIEW.COLUMNS",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 947,
+            "y": 131.5
+          },
+          "nodeIndex": "INFO.VIEW.MEASURES",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1231,
+            "y": 131.5
+          },
+          "nodeIndex": "INFO.VIEW.RELATIONSHIPS",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1515,
+            "y": 131.5
+          },
+          "nodeIndex": "INFO.VIEW.TABLES",
           "size": {
             "height": 200,
             "width": 234
