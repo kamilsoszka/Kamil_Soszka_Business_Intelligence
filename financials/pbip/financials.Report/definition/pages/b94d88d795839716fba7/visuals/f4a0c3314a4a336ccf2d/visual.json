@@ -106,7 +106,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'UPPER_SHAPE_UNITS_SOLD'"
+                  "Value": "'LOW_SHAPE_UNITS_SOLD'"
                 }
               }
             }

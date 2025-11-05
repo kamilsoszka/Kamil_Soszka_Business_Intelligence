@@ -106,7 +106,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'BOTTOM_SHAPE_PROFIT_KPI'"
+                  "Value": "'LOW_SHAPE_PROFIT_KPI'"
                 }
               }
             }

@@ -106,7 +106,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'BOTTOM_SHAPE_SALES_kpi'"
+                  "Value": "'LOW_SHAPE_SALES_kpi'"
                 }
               }
             }

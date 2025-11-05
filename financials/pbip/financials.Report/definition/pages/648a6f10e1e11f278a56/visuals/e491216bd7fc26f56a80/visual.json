@@ -93,7 +93,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'UPPER_SHAPE_PROFIT'"
+                  "Value": "'UP_SHAPE_PROFIT'"
                 }
               }
             }

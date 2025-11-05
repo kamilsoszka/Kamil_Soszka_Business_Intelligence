@@ -4,7 +4,7 @@
   "position": {
     "x": 0,
     "y": 0,
-    "z": 0,
+    "z": 1500,
     "height": 110,
     "width": 290,
     "tabOrder": 3000
@@ -93,7 +93,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'BOTTOM_SHAPE_UNITS_SOLD_KPI'"
+                  "Value": "'UP_SHAPE_UNITS_SOLD_KPI'"
                 }
               }
             }

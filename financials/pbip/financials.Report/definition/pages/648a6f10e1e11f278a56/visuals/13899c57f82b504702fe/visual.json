@@ -93,7 +93,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'UPPER_SHAPE_SALES'"
+                  "Value": "'UP_SHAPE_SALES'"
                 }
               }
             }
