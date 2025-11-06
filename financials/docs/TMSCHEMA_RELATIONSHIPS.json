@@ -1,0 +1,24 @@
+[
+  {
+    "ID": 2720,
+    "ModelID": 1,
+    "Name": "33a576f6-68ff-af80-a567-7cc9aa4fc9e2",
+    "IsActive": "True",
+    "Type": 1,
+    "CrossFilteringBehavior": 1,
+    "JoinOnDateBehavior": 1,
+    "RelyOnReferentialIntegrity": "False",
+    "FromTableID": 13,
+    "FromColumnID": 35,
+    "FromCardinality": 2,
+    "ToTableID": 1185,
+    "ToColumnID": 1235,
+    "ToCardinality": 1,
+    "State": 1,
+    "RelationshipStorageID": 2726,
+    "RelationshipStorage2ID": "",
+    "ModifiedTime": 45962.74817,
+    "RefreshedTime": 45962.74817,
+    "SecurityFilteringBehavior": 1
+  }
+]
