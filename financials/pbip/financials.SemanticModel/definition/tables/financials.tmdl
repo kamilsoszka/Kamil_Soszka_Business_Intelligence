@@ -1,9 +1,9 @@
 table financials
-	lineageTag: da8f9d39-3071-4a1f-8ea8-fa6ecef97214
+	lineageTag: a02ad5b5-606d-4e93-910e-f7a88706dd87
 
 	column Segment
 		dataType: string
-		lineageTag: 024691b3-f4b2-4ca5-825d-b48b00176880
+		lineageTag: 1b02e834-2a68-4cff-83e8-de73cea551ff
 		summarizeBy: none
 		sourceColumn: Segment
 
@@ -11,7 +11,7 @@ table financials
 
 	column Country
 		dataType: string
-		lineageTag: e1950f75-3812-43cc-9d1f-5a27ece54d6a
+		lineageTag: a138f726-f056-40f5-9d69-baa149166583
 		summarizeBy: none
 		sourceColumn: Country
 
@@ -19,7 +19,7 @@ table financials
 
 	column Product
 		dataType: string
-		lineageTag: c752982c-fa3d-4b2d-b537-4199c402bc07
+		lineageTag: 899107f3-6523-4da3-8662-688de6476652
 		summarizeBy: none
 		sourceColumn: Product
 
@@ -27,7 +27,7 @@ table financials
 
 	column 'Discount Band'
 		dataType: string
-		lineageTag: 749b6fe2-f593-4f5d-a41f-048e4003c271
+		lineageTag: 3d5dbaed-81cb-42df-aa2d-df30f6c4fdec
 		summarizeBy: none
 		sourceColumn: Discount Band
 
@@ -35,7 +35,7 @@ table financials
 
 	column 'Units Sold'
 		dataType: double
-		lineageTag: 5ec8412a-8192-48a5-b653-607211342f5c
+		lineageTag: aeff8b3f-da91-4611-b7f6-eb49d9af8889
 		summarizeBy: sum
 		sourceColumn: Units Sold
 
@@ -46,7 +46,7 @@ table financials
 	column 'Manufacturing Price'
 		dataType: int64
 		formatString: 0
-		lineageTag: fbd1f565-16c8-4266-9e07-cb1a63180915
+		lineageTag: dc327717-7bf3-4d28-8747-c9bb9a08677b
 		summarizeBy: sum
 		sourceColumn: Manufacturing Price
 
@@ -55,7 +55,7 @@ table financials
 	column 'Sale Price'
 		dataType: int64
 		formatString: 0
-		lineageTag: 3816a55d-9b1f-4191-9278-bfe9c8c59cd1
+		lineageTag: f97b5d20-4a99-4cb6-907e-c83ff2056b92
 		summarizeBy: sum
 		sourceColumn: Sale Price
 
@@ -63,7 +63,7 @@ table financials
 
 	column 'Gross Sales'
 		dataType: double
-		lineageTag: d23118af-e55a-4287-96ec-9cbd397e13fd
+		lineageTag: dcc23108-2890-4de5-9bbe-75b5a55c6377
 		summarizeBy: sum
 		sourceColumn: Gross Sales
 
@@ -72,18 +72,17 @@ table financials
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column Discounts
-		dataType: double
-		lineageTag: c4646a82-87aa-4af8-8112-6cef49af3604
+		dataType: int64
+		formatString: 0
+		lineageTag: e7a4cc50-77e9-4c02-896d-799846ff6afc
 		summarizeBy: sum
 		sourceColumn: Discounts
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column Sales
 		dataType: double
-		lineageTag: 92df4f62-9343-43b1-9f2c-72b28496493f
+		lineageTag: 66020c7f-c4c7-4986-8ad0-8049e8819ec5
 		summarizeBy: sum
 		sourceColumn: Sales
 
@@ -92,18 +91,17 @@ table financials
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column COGS
-		dataType: double
-		lineageTag: 59c22a0e-1194-46a4-95c4-29359c9f42b0
+		dataType: int64
+		formatString: 0
+		lineageTag: d3d80034-31a6-48f5-bdd4-598d3b2de90f
 		summarizeBy: sum
 		sourceColumn: COGS
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column Profit
 		dataType: double
-		lineageTag: 02e5450c-ba9d-474e-8d1a-2cff15923b71
+		lineageTag: 546c9b5a-6d9d-4e0e-ad16-768ec34da786
 		summarizeBy: sum
 		sourceColumn: Profit
 
@@ -114,7 +112,7 @@ table financials
 	column Date
 		dataType: dateTime
 		formatString: Long Date
-		lineageTag: 96f45efb-931b-41b3-b1b5-74c26f156d18
+		lineageTag: e1e7a63b-1857-4c93-a381-df0c5d298e56
 		summarizeBy: none
 		sourceColumn: Date
 
@@ -125,7 +123,7 @@ table financials
 	column 'Month Number'
 		dataType: int64
 		formatString: 0
-		lineageTag: 7fc0daaf-1697-43fd-a4da-e2056d48bb14
+		lineageTag: 1941068e-6b6c-45c2-97be-70ed57035728
 		summarizeBy: sum
 		sourceColumn: Month Number
 
@@ -133,7 +131,7 @@ table financials
 
 	column 'Month Name'
 		dataType: string
-		lineageTag: af5e9b0d-d613-46cb-a24d-2592e6afb4f8
+		lineageTag: 1dd4e938-0eca-421d-9fbb-49059d8a7c53
 		summarizeBy: none
 		sourceColumn: Month Name
 
@@ -142,7 +140,7 @@ table financials
 	column Year
 		dataType: int64
 		formatString: 0
-		lineageTag: 3a9363db-f585-4c75-bb5c-7631703220ff
+		lineageTag: 1260b365-0f11-4cac-8574-07ce40f40b9d
 		summarizeBy: sum
 		sourceColumn: Year
 
@@ -152,11 +150,46 @@ table financials
 		mode: import
 		source =
 				let
-				 Source = Excel.Workbook(File.Contents("C:\Program Files\Microsoft Power BI Desktop\bin\SampleData\Financial Sample.xlsx"), null, true),
-				    financials_Table = Source{[Item="financials",Kind="Table"]}[Data],
-				    #"Changed Type" = Table.TransformColumnTypes(financials_Table,{{"Segment", type text}, {"Country", type text}, {"Product", type text}, {"Discount Band", type text}, {"Units Sold", type number}, {"Manufacturing Price", Int64.Type}, {"Sale Price", Int64.Type}, {"Gross Sales", type number}, {"Discounts", type number}, {"Sales", type number}, {"COGS", type number}, {"Profit", type number}, {"Date", type date}, {"Month Number", Int64.Type}, {"Month Name", type text}, {"Year", Int64.Type}})
+				  Source = SharePoint.Files(
+				    "https://ksoszka-my.sharepoint.com/personal/kamil_soszka_ksoszka_onmicrosoft_com"
+				  ),
+				  #"https://ksoszka-my sharepoint com/personal/kamil_soszka_ksoszka_onmicrosoft_com/Documents/Kamil Soszka Business Intelligence/financials/docs/_Financial_Sample xlsx"
+				    = Source
+				    {
+				      [
+				        #"Folder Path"
+				          = "https://ksoszka-my.sharepoint.com/personal/kamil_soszka_ksoszka_onmicrosoft_com/Documents/Kamil Soszka Business Intelligence/financials/docs/",
+				        Name = "Financial_Sample.xlsx"
+				      ]
+				    }
+				    [Content],
+				  #"Imported Excel Workbook" = Excel.Workbook(
+				    #"https://ksoszka-my sharepoint com/personal/kamil_soszka_ksoszka_onmicrosoft_com/Documents/Kamil Soszka Business Intelligence/financials/docs/_Financial_Sample xlsx"
+				  ),
+				  financials_Table = #"Imported Excel Workbook"{[Item = "financials", Kind = "Table"]}[Data],
+				  #"Changed Type" = Table.TransformColumnTypes(
+				    financials_Table,
+				    {
+				      {"Segment", type text},
+				      {"Country", type text},
+				      {"Product", type text},
+				      {"Discount Band", type text},
+				      {"Units Sold", type number},
+				      {"Manufacturing Price", Int64.Type},
+				      {"Sale Price", Int64.Type},
+				      {"Gross Sales", type number},
+				      {"Discounts", Int64.Type},
+				      {"Sales", type number},
+				      {"COGS", Int64.Type},
+				      {"Profit", type number},
+				      {"Date", type date},
+				      {"Month Number", Int64.Type},
+				      {"Month Name", type text},
+				      {"Year", Int64.Type}
+				    }
+				  )
 				in
-				 #"Changed Type"
+				  #"Changed Type"
 
 	annotation PBI_NavigationStepName = Navigation
 

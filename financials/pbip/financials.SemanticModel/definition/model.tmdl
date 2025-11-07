@@ -14,13 +14,9 @@ annotation __TEdtr = 1
 
 annotation PBI_ProTooling = ["DevMode"]
 
-ref table financials
 ref table Model_Measures
 ref table 'Dates Optimized'
-ref table 'INFO.VIEW.COLUMNS'
-ref table 'INFO.VIEW.MEASURES'
-ref table 'INFO.VIEW.RELATIONSHIPS'
-ref table 'INFO.VIEW.TABLES'
+ref table financials
 
 ref cultureInfo en-US
 

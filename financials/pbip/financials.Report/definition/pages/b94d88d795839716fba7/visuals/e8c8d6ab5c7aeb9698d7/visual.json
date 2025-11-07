@@ -6,7 +6,8 @@
     "y": 0,
     "z": 3000,
     "height": 146,
-    "width": 290
+    "width": 290,
+    "tabOrder": 3000
   },
   "visualGroup": {
     "displayName": "KPI_FOR_PROFIT",

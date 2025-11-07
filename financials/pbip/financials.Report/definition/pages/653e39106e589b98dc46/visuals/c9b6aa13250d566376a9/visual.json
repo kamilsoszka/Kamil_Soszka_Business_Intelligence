@@ -6,7 +6,8 @@
     "y": 0,
     "z": 0,
     "height": 385.70772058823536,
-    "width": 480
+    "width": 480,
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "donutChart",

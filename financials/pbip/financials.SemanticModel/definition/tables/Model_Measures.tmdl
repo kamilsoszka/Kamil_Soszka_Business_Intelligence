@@ -111,8 +111,8 @@ table Model_Measures
 			    */
 			    IF (
 			        Is_Sales_Increased,
-			        UNICHAR ( 11165 ), // Up arrow for sales increase (good)
-			        UNICHAR ( 11167 )  // Down arrow for sales decrease/no change (bad)
+			        "▲", // Up arrow for sales increase (good)
+			        "▼" // Down arrow for sales decrease/no change (bad)
 			    )
 			RETURN
 			    /*
@@ -263,8 +263,8 @@ table Model_Measures
 			    */
 			    IF (
 			        Is_Change_Positive,
-			        UNICHAR ( 11165 ), // Up arrow for increase
-			        UNICHAR ( 11167 )  // Down arrow for decrease/no change
+			        "▲", // Up arrow for increase
+			        "▼"  // Down arrow for decrease/no change
 			    )
 			RETURN
 			    /*
@@ -449,8 +449,8 @@ table Model_Measures
 			    */
 			    IF (
 			        Is_Profit_Increased,
-			        UNICHAR ( 11165 ), // Up arrow for profit increase (good)
-			        UNICHAR ( 11167 )  // Down arrow for profit decrease/no change (bad)
+			        "▲", // Up arrow for profit increase (good)
+			        "▼"  // Down arrow for profit decrease/no change (bad)
 			    )
 			RETURN
 			    /*
@@ -636,8 +636,8 @@ table Model_Measures
 			    */
 			    IF (
 			        Is_Units_Increased,
-			        UNICHAR ( 11165 ), // Up arrow for volume increase (good)
-			        UNICHAR ( 11167 )  // Down arrow for volume decrease/no change (bad)
+			        "▲", // Up arrow for volume increase (good)
+			        "▼"  // Down arrow for volume decrease/no change (bad)
 			    )
 			RETURN
 			    /*

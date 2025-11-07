@@ -3,9 +3,9 @@ var analyzer = new BestPracticeAnalyzer();
 var results = analyzer.Analyze(Model);
 
 // Display results in Output Window
-foreach(var result in results)
-{
-    Info($"[{result.Severity}] {result.Object?.Name ?? "Model"}: {result.Message}");
+foreach(var result in results) {
+        Info($"[{result.Severity}] {result.Object?.Name ?? "
+                Model "}: {result.Message}");
 }
 
 // Show summary

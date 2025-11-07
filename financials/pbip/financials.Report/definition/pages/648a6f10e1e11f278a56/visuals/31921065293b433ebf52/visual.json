@@ -6,8 +6,7 @@
     "y": 0,
     "z": 3000,
     "height": 146,
-    "width": 290,
-    "tabOrder": 1000
+    "width": 290
   },
   "visualGroup": {
     "displayName": "KPI_UNITS_SOLD",
