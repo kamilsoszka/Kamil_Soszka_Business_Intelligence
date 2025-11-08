@@ -52,7 +52,9 @@ This repository serves as a hands-on learning environment for:
 
 ---
 
-<img width="1300" height="727" alt="image" src="https://github.com/user-attachments/assets/84fd92c3-96b8-4a31-96b0-3ea0eddbf5fb" />
+<img width="1918" height="867" alt="image" src="https://github.com/user-attachments/assets/d47c2a64-e101-49b3-8de7-efcb6ce2bf3e" />
 
+<img width="1918" height="867" alt="image" src="https://github.com/user-attachments/assets/5300cad0-195f-4201-aadb-3c6f5523da2f" />
 
 *Repository created for educational and developmental purposes*
+
