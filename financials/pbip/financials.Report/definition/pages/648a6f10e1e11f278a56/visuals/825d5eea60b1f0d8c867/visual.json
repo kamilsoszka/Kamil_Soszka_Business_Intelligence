@@ -106,65 +106,7 @@
       ],
       "dataPoint": [
         {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "FillRule": {
-                      "Input": {
-                        "Aggregation": {
-                          "Expression": {
-                            "Column": {
-                              "Expression": {
-                                "SourceRef": {
-                                  "Entity": "financials"
-                                }
-                              },
-                              "Property": "Segment"
-                            }
-                          },
-                          "Function": 5
-                        }
-                      },
-                      "FillRule": {
-                        "linearGradient3": {
-                          "min": {
-                            "color": {
-                              "Literal": {
-                                "Value": "'minColor'"
-                              }
-                            }
-                          },
-                          "mid": {
-                            "color": {
-                              "Literal": {
-                                "Value": "'midColor'"
-                              }
-                            }
-                          },
-                          "max": {
-                            "color": {
-                              "Literal": {
-                                "Value": "'maxColor'"
-                              }
-                            }
-                          },
-                          "nullColoringStrategy": {
-                            "strategy": {
-                              "Literal": {
-                                "Value": "'asZero'"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
+          "properties": {},
           "selector": {
             "data": [
               {
@@ -173,6 +115,46 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#ffffff'"
+                    }
+                  }
+                }
+              }
+            },
+            "borderShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "borderColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#B3B3B3'"
+                    }
+                  }
+                }
+              }
+            },
+            "borderSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "2D"
+                }
+              }
+            }
           }
         }
       ],
