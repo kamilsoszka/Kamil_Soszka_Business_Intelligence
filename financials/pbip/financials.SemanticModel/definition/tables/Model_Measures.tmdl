@@ -61,12 +61,11 @@ table Model_Measures
 			    VAR: Used to declare variables that store intermediate calculation results.
 			    This improves performance and code readability by calculating values once.
 			*/
-			VAR Current_Sales = 
-			    /*
+			VAR Current_Sales = /*
 			        Retrieves the Sales value for the current filter context.
 			        This variable calls the base [Sales] measure.
 			    */
-			    [Sales]
+			[Sales]
 			VAR Previous_Year_Sales =
 			    /*
 			        Calculates the Sales for the same period in the previous year.
@@ -75,9 +74,9 @@ table Model_Measures
 			        from the previous year corresponding to the current date context.
 			        This is the recommended best practice for accurate YoY comparisons.
 			    */
-			    CALCULATE ( 
-			        [Sales], 
-			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] ) 
+			    CALCULATE (
+			        [Sales],
+			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] )
 			    )
 			VAR Change_Percentage =
 			    /*
@@ -92,12 +91,11 @@ table Model_Measures
 			        Previous_Year_Sales,
 			        BLANK () // Safe handling of division by zero
 			    )
-			VAR Is_Sales_Increased = 
-			    /*
+			VAR Is_Sales_Increased = /*
 			        Creates a logical (TRUE/FALSE) variable indicating if sales increased.
 			        A positive change percentage means sales grew compared to previous year.
 			    */
-			    Change_Percentage > 0
+			Change_Percentage > 0
 			VAR Arrow_Symbol =
 			    /*
 			        Assigns an arrow symbol based on the direction of the sales change.
@@ -111,7 +109,8 @@ table Model_Measures
 			    */
 			    IF (
 			        Is_Sales_Increased,
-			        "▲", // Up arrow for sales increase (good)
+			        "▲",
+			        // Up arrow for sales increase (good)
 			        "▼" // Down arrow for sales decrease/no change (bad)
 			    )
 			RETURN
@@ -135,14 +134,15 @@ table Model_Measures
 			            - FORMAT(Change_Percentage, "0.00%"): Formats the percentage change as
 			              a percentage with two decimal places (e.g., 15.25%)
 			        */
-			        "PY " & FORMAT ( Previous_Year_Sales, "#,,#,,.00M" ) & " " & Arrow_Symbol & " "
+			        "PY "
+			            & FORMAT ( Previous_Year_Sales, "#,,#,,.00M" ) & " " & Arrow_Symbol & " "
 			            & FORMAT ( Change_Percentage, "0.00%" )
 			    )
 			```
 		displayFolder: sales
 		lineageTag: daca2775-4004-40c0-980d-d1d51f794411
 
-	measure 'Sales Color Optimized' = ```
+	measure 'Sales Color Optimized' =
 			
 			/*
 			    Business Goal: This measure returns a color code (hex) based on the Year-over-Year (YoY)
@@ -155,15 +155,17 @@ table Model_Measures
 			    VAR: Used to declare variables that store intermediate calculation results.
 			    This improves performance and code readability by calculating values once.
 			*/
-			VAR Current_Sales = 
+			VAR Current_Sales =
 			    /*
 			        IFERROR: Evaluates the [Sales] measure and returns it if no error occurs.
 			        If an error is encountered, it returns BLANK() instead.
 			        This ensures the measure handles calculation errors gracefully without breaking
 			        and maintains data cleanliness.
 			    */
-			    IFERROR( [Sales], BLANK() )
-			
+			    IFERROR (
+			        [Sales],
+			        BLANK ()
+			    )
 			VAR Previous_Year_Sales =
 			    /*
 			        CALCULATE: Modifies the filter context for the [Sales] measure evaluation.
@@ -173,20 +175,21 @@ table Model_Measures
 			        This enables accurate year-over-year comparisons for sales performance.
 			    */
 			    CALCULATE (
-			        IFERROR( [Sales], BLANK() ),
+			        IFERROR ( [Sales], BLANK () ),
 			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] )
-			    )
-			
-			// Calculates the absolute Year-over-Year Change: Current Period - Previous Year
-			VAR YoY_Change_Absolute = 
+			    ) // Calculates the absolute Year-over-Year Change: Current Period - Previous Year
+			VAR YoY_Change_Absolute =
 			    /*
 			        COALESCE: Returns the first expression that does not evaluate to BLANK.
 			        Here, it replaces BLANK values with 0 to ensure correct arithmetic operations
 			        in the subtraction. This prevents calculation errors when either current or
 			        previous year sales data is missing.
 			    */
-			    COALESCE( Current_Sales, 0 ) - COALESCE( Previous_Year_Sales, 0 )
-			
+			    COALESCE (
+			        Current_Sales,
+			        0
+			    )
+			        - COALESCE ( Previous_Year_Sales, 0 )
 			RETURN
 			    /*
 			        SWITCH: Evaluates multiple conditions and returns one of several result expressions.
@@ -194,19 +197,18 @@ table Model_Measures
 			        of YoY_Change_Absolute. This structure checks each condition in sequence.
 			    */
 			    SWITCH (
-			        TRUE(),
+			        TRUE (),
 			        // Condition 1: Sales increased (Green) - Favorable performance
-			        YoY_Change_Absolute > 0, "#00A650", 
+			        YoY_Change_Absolute > 0, "#00A650",
 			        // Condition 2: Sales decreased (Red) - Unfavorable performance
-			        YoY_Change_Absolute < 0, "#E60000", 
+			        YoY_Change_Absolute < 0, "#E60000",
 			        // Condition 3: No change, zero, or BLANK (Gray) - Neutral performance
-			        "#7F8C8D" 
+			        "#7F8C8D"
 			    )
-			```
 		displayFolder: sales
 		lineageTag: 564a6613-a26b-4df3-a93c-121b86726bd6
 
-	measure 'COGS KPI Optimized' = ```
+	measure 'COGS KPI Optimized' =
 			
 			/*
 			    Business Goal: Constructs a concise text-formatted KPI indicator.
@@ -215,12 +217,11 @@ table Model_Measures
 			    This measure is designed for use in card visuals or KPIs to provide a quick,
 			    comprehensive view of performance compared to the previous year.
 			*/
-			VAR Current_COGS = 
-			    /*
+			VAR Current_COGS = /*
 			        Retrieves the COGS value for the current filter context.
 			        This variable calls the base [COGS] measure.
 			    */
-			    [COGS]
+			[COGS]
 			VAR Previous_Year_COGS =
 			    /*
 			        Calculates the COGS for the same period in the previous year.
@@ -229,9 +230,9 @@ table Model_Measures
 			        from the previous year corresponding to the current date context.
 			        This is the standard and most accurate method for YoY comparisons.
 			    */
-			    CALCULATE ( 
-			        [COGS], 
-			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] ) 
+			    CALCULATE (
+			        [COGS],
+			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] )
 			    )
 			VAR Change_Percentage =
 			    /*
@@ -246,13 +247,12 @@ table Model_Measures
 			        Previous_Year_COGS,
 			        BLANK () // Returns BLANK instead of an error if dividing by zero
 			    )
-			VAR Is_Change_Positive = 
-			    /*
+			VAR Is_Change_Positive = /*
 			        Creates a logical (TRUE/FALSE) variable indicating if the change was positive.
 			        This variable improves code readability for the subsequent IF statement.
 			        A positive change means COGS increased (which is typically unfavorable).
 			    */
-			    Change_Percentage > 0
+			Change_Percentage > 0
 			VAR Arrow_Symbol =
 			    /*
 			        Assigns an arrow symbol based on the direction of the change.
@@ -263,8 +263,9 @@ table Model_Measures
 			    */
 			    IF (
 			        Is_Change_Positive,
-			        "▲", // Up arrow for increase
-			        "▼"  // Down arrow for decrease/no change
+			        "▲",
+			        // Up arrow for increase
+			        "▼" // Down arrow for decrease/no change
 			    )
 			RETURN
 			    /*
@@ -285,14 +286,14 @@ table Model_Measures
 			            - FORMAT(Change_Percentage, "0.00%"): Formats the percentage change as
 			              a percentage with two decimal places (e.g., 15.25%)
 			        */
-			        "PY " & FORMAT ( Previous_Year_COGS, "#,,#,,.00M" ) & " " & Arrow_Symbol & " "
+			        "PY "
+			            & FORMAT ( Previous_Year_COGS, "#,,#,,.00M" ) & " " & Arrow_Symbol & " "
 			            & FORMAT ( Change_Percentage, "0.00%" )
 			    )
-			```
 		displayFolder: cogs
 		lineageTag: ea5432d5-b5ad-4bcc-a9f1-9367e9b6847e
 
-	measure 'COGS Color Optimized' = ```
+	measure 'COGS Color Optimized' =
 			
 			/*
 			    Business Goal: This measure does not return a numeric value but a color code (hex).
@@ -306,14 +307,16 @@ table Model_Measures
 			    VAR: Used to declare a variable that stores the result of a DAX expression.
 			    Variables improve performance and readability by calculating a value once and reusing it.
 			*/
-			VAR Current_COGS = 
+			VAR Current_COGS =
 			    /*
 			        IFERROR: Evaluates the first expression and returns it if no error occurs.
 			        If an error is encountered, it returns the second expression (BLANK() in this case).
 			        This ensures the measure is robust against calculation errors.
 			    */
-			    IFERROR( [COGS], BLANK() )
-			
+			    IFERROR (
+			        [COGS],
+			        BLANK ()
+			    )
 			VAR Previous_Year_COGS =
 			    /*
 			        CALCULATE: The primary function for context modification in DAX.
@@ -323,19 +326,20 @@ table Model_Measures
 			        For example, if the current context is March 2024, it returns dates for March 2023.
 			    */
 			    CALCULATE (
-			        IFERROR( [COGS], BLANK() ),
+			        IFERROR ( [COGS], BLANK () ),
 			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] )
-			    )
-			
-			// Calculates the absolute Year-over-Year Change: Current Period - Previous Year
-			VAR YoY_Change_Absolute = 
+			    ) // Calculates the absolute Year-over-Year Change: Current Period - Previous Year
+			VAR YoY_Change_Absolute =
 			    /*
 			        COALESCE: Returns the first expression that does not evaluate to BLANK.
 			        If the first expression is blank, it checks the second, and so on.
 			        Here, it replaces BLANK values with 0 to ensure correct arithmetic operations.
 			    */
-			    COALESCE( Current_COGS, 0 ) - COALESCE( Previous_Year_COGS, 0 )
-			
+			    COALESCE (
+			        Current_COGS,
+			        0
+			    )
+			        - COALESCE ( Previous_Year_COGS, 0 )
 			RETURN
 			    /*
 			        SWITCH: Evaluates a list of conditions and returns one of multiple result expressions.
@@ -346,15 +350,14 @@ table Model_Measures
 			        - Gray (#7F8C8D) for no change or if the value is BLANK (coerced to 0).
 			    */
 			    SWITCH (
-			        TRUE(),
+			        TRUE (),
 			        // Condition 1: COGS decreased (Green) - Favorable
-			        YoY_Change_Absolute < 0, "#00A650", 
+			        YoY_Change_Absolute < 0, "#00A650",
 			        // Condition 2: COGS increased (Red) - Unfavorable
-			        YoY_Change_Absolute > 0, "#E60000", 
+			        YoY_Change_Absolute > 0, "#E60000",
 			        // Condition 3: No change, 0, or BLANK (Gray) - Neutral
-			        "#7F8C8D" 
+			        "#7F8C8D"
 			    )
-			```
 		displayFolder: cogs
 		lineageTag: aa06622d-53ee-4262-bb31-5d45c574d0e4
 
@@ -399,12 +402,11 @@ table Model_Measures
 			    VAR: Used to declare variables that store intermediate calculation results.
 			    This improves performance and code readability by calculating values once.
 			*/
-			VAR Current_Profit = 
-			    /*
+			VAR Current_Profit = /*
 			        Retrieves the Profit value for the current filter context.
 			        This variable calls the base [Profit] measure.
 			    */
-			    [Profit]
+			[Profit]
 			VAR Previous_Year_Profit =
 			    /*
 			        Calculates the Profit for the same period in the previous year.
@@ -413,9 +415,9 @@ table Model_Measures
 			        from the previous year corresponding to the current date context.
 			        This is the standard method for accurate YoY comparisons.
 			    */
-			    CALCULATE ( 
-			        [Profit], 
-			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] ) 
+			    CALCULATE (
+			        [Profit],
+			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] )
 			    )
 			VAR Change_Percentage =
 			    /*
@@ -430,12 +432,11 @@ table Model_Measures
 			        Previous_Year_Profit,
 			        BLANK () // Safe handling of division by zero
 			    )
-			VAR Is_Profit_Increased = 
-			    /*
+			VAR Is_Profit_Increased = /*
 			        Creates a logical (TRUE/FALSE) variable indicating if profit increased.
 			        A positive change percentage means profit grew compared to previous year.
 			    */
-			    Change_Percentage > 0
+			Change_Percentage > 0
 			VAR Arrow_Symbol =
 			    /*
 			        Assigns an arrow symbol based on the direction of the profit change.
@@ -449,8 +450,9 @@ table Model_Measures
 			    */
 			    IF (
 			        Is_Profit_Increased,
-			        "▲", // Up arrow for profit increase (good)
-			        "▼"  // Down arrow for profit decrease/no change (bad)
+			        "▲",
+			        // Up arrow for profit increase (good)
+			        "▼" // Down arrow for profit decrease/no change (bad)
 			    )
 			RETURN
 			    /*
@@ -472,14 +474,15 @@ table Model_Measures
 			            - FORMAT(Change_Percentage, "0.00%"): Formats the percentage change as
 			              a percentage with two decimal places (e.g., 15.25%)
 			        */
-			        "PY " & FORMAT ( Previous_Year_Profit, "#,,#,,.00M" ) & " " & Arrow_Symbol & " "
+			        "PY "
+			            & FORMAT ( Previous_Year_Profit, "#,,#,,.00M" ) & " " & Arrow_Symbol & " "
 			            & FORMAT ( Change_Percentage, "0.00%" )
 			    )
 			```
 		displayFolder: profit
 		lineageTag: dd035eb9-7259-4dc0-a085-2b57b4bcf7cd
 
-	measure 'Profit Color Optimized' = ```
+	measure 'Profit Color Optimized' =
 			
 			/*
 			    Business Goal: This measure returns a color code (hex) based on the Year-over-Year (YoY)
@@ -492,14 +495,16 @@ table Model_Measures
 			    VAR: Used to declare variables that store intermediate calculation results.
 			    This improves performance and code readability.
 			*/
-			VAR Current_Profit = 
+			VAR Current_Profit =
 			    /*
 			        IFERROR: Evaluates the [Profit] measure and returns it if no error occurs.
 			        If an error is encountered, it returns BLANK() instead.
 			        This ensures the measure handles calculation errors gracefully without breaking.
 			    */
-			    IFERROR( [Profit], BLANK() )
-			
+			    IFERROR (
+			        [Profit],
+			        BLANK ()
+			    )
 			VAR Previous_Year_Profit =
 			    /*
 			        CALCULATE: Modifies the filter context for the [Profit] measure evaluation.
@@ -509,20 +514,21 @@ table Model_Measures
 			        This enables accurate year-over-year comparisons.
 			    */
 			    CALCULATE (
-			        IFERROR( [Profit], BLANK() ),
+			        IFERROR ( [Profit], BLANK () ),
 			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] )
-			    )
-			
-			// Calculates the absolute Year-over-Year Change: Current Period - Previous Year
-			VAR YoY_Change_Absolute = 
+			    ) // Calculates the absolute Year-over-Year Change: Current Period - Previous Year
+			VAR YoY_Change_Absolute =
 			    /*
 			        COALESCE: Returns the first expression that does not evaluate to BLANK.
 			        Here, it replaces BLANK values with 0 to ensure correct arithmetic operations
 			        in the subtraction. This prevents errors when either current or previous year
 			        data is missing.
 			    */
-			    COALESCE( Current_Profit, 0 ) - COALESCE( Previous_Year_Profit, 0 )
-			
+			    COALESCE (
+			        Current_Profit,
+			        0
+			    )
+			        - COALESCE ( Previous_Year_Profit, 0 )
 			RETURN
 			    /*
 			        SWITCH: Evaluates multiple conditions and returns one of several result expressions.
@@ -530,15 +536,14 @@ table Model_Measures
 			        of YoY_Change_Absolute. This structure checks each condition in sequence.
 			    */
 			    SWITCH (
-			        TRUE(),
+			        TRUE (),
 			        // Condition 1: Profit increased (Green) - Favorable
-			        YoY_Change_Absolute > 0, "#00A650", 
+			        YoY_Change_Absolute > 0, "#00A650",
 			        // Condition 2: Profit decreased (Red) - Unfavorable
-			        YoY_Change_Absolute < 0, "#E60000", 
+			        YoY_Change_Absolute < 0, "#E60000",
 			        // Condition 3: No change, zero, or BLANK (Gray) - Neutral
-			        "#7F8C8D" 
+			        "#7F8C8D"
 			    )
-			```
 		displayFolder: profit
 		lineageTag: bdd3eb93-aeca-4623-bc15-3c19d80b7a5f
 
@@ -586,12 +591,11 @@ table Model_Measures
 			    VAR: Used to declare variables that store intermediate calculation results.
 			    This improves performance and code readability by calculating values once.
 			*/
-			VAR Current_Units_Sold = 
-			    /*
+			VAR Current_Units_Sold = /*
 			        Retrieves the Units Sold value for the current filter context.
 			        This variable calls the base [Units Sold] measure.
 			    */
-			    [Units Sold]
+			[Units Sold]
 			VAR Previous_Year_Units_Sold =
 			    /*
 			        Calculates the Units Sold for the same period in the previous year.
@@ -600,9 +604,9 @@ table Model_Measures
 			        from the previous year corresponding to the current date context.
 			        This is the recommended best practice for accurate YoY volume comparisons.
 			    */
-			    CALCULATE ( 
-			        [Units Sold], 
-			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] ) 
+			    CALCULATE (
+			        [Units Sold],
+			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] )
 			    )
 			VAR Change_Percentage =
 			    /*
@@ -617,12 +621,11 @@ table Model_Measures
 			        Previous_Year_Units_Sold,
 			        BLANK () // Safe handling of division by zero
 			    )
-			VAR Is_Units_Increased = 
-			    /*
+			VAR Is_Units_Increased = /*
 			        Creates a logical (TRUE/FALSE) variable indicating if units sold increased.
 			        A positive change percentage means sales volume grew compared to previous year.
 			    */
-			    Change_Percentage > 0
+			Change_Percentage > 0
 			VAR Arrow_Symbol =
 			    /*
 			        Assigns an arrow symbol based on the direction of the volume change.
@@ -636,8 +639,9 @@ table Model_Measures
 			    */
 			    IF (
 			        Is_Units_Increased,
-			        "▲", // Up arrow for volume increase (good)
-			        "▼"  // Down arrow for volume decrease/no change (bad)
+			        "▲",
+			        // Up arrow for volume increase (good)
+			        "▼" // Down arrow for volume decrease/no change (bad)
 			    )
 			RETURN
 			    /*
@@ -654,20 +658,21 @@ table Model_Measures
 			            Constructs the final KPI string by concatenating multiple elements:
 			            - "PY ": Literal text prefix for Previous Year
 			            - FORMAT(Previous_Year_Units_Sold, "#,,#,,.00M"): Formats the previous year value
-			              in millions with two decimal places using thousand separators
+			              in thousands with two decimal places using thousand separators
 			              (e.g., 1.50M for 1,500,000 units)
 			            - Arrow_Symbol: The directional arrow (↑ or ↓)
 			            - FORMAT(Change_Percentage, "0.00%"): Formats the percentage change as
 			              a percentage with two decimal places (e.g., 15.25%)
 			        */
-			        "PY " & FORMAT ( Previous_Year_Units_Sold, "#,,#,,.00M" ) & " " & Arrow_Symbol & " "
+			        "PY "
+			            & FORMAT ( Previous_Year_Units_Sold, "#,,#,.00K" ) & " " & Arrow_Symbol & " "
 			            & FORMAT ( Change_Percentage, "0.00%" )
 			    )
 			```
 		displayFolder: units sold
 		lineageTag: f661ed43-ab41-41a1-91fa-8e232a5c9c01
 
-	measure 'Units Sold Color Optimized' = ```
+	measure 'Units Sold Color Optimized' =
 			
 			/*
 			    Business Goal: This measure returns a color code (hex) based on the Year-over-Year (YoY)
@@ -680,15 +685,17 @@ table Model_Measures
 			    VAR: Used to declare variables that store intermediate calculation results.
 			    This improves performance and code readability by calculating values once.
 			*/
-			VAR Current_Units_Sold = 
+			VAR Current_Units_Sold =
 			    /*
 			        IFERROR: Evaluates the [Units Sold] measure and returns it if no error occurs.
 			        If an error is encountered, it returns BLANK() instead.
 			        This ensures the measure handles calculation errors gracefully without breaking
 			        and maintains data cleanliness.
 			    */
-			    IFERROR( [Units Sold], BLANK() )
-			
+			    IFERROR (
+			        [Units Sold],
+			        BLANK ()
+			    )
 			VAR Previous_Year_Units_Sold =
 			    /*
 			        CALCULATE: Modifies the filter context for the [Units Sold] measure evaluation.
@@ -698,20 +705,21 @@ table Model_Measures
 			        This enables accurate year-over-year comparisons for volume performance.
 			    */
 			    CALCULATE (
-			        IFERROR( [Units Sold], BLANK() ),
+			        IFERROR ( [Units Sold], BLANK () ),
 			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] )
-			    )
-			
-			// Calculates the absolute Year-over-Year Change: Current Period - Previous Year
-			VAR YoY_Change_Absolute = 
+			    ) // Calculates the absolute Year-over-Year Change: Current Period - Previous Year
+			VAR YoY_Change_Absolute =
 			    /*
 			        COALESCE: Returns the first expression that does not evaluate to BLANK.
 			        Here, it replaces BLANK values with 0 to ensure correct arithmetic operations
 			        in the subtraction. This prevents calculation errors when either current or
 			        previous year units sold data is missing.
 			    */
-			    COALESCE( Current_Units_Sold, 0 ) - COALESCE( Previous_Year_Units_Sold, 0 )
-			
+			    COALESCE (
+			        Current_Units_Sold,
+			        0
+			    )
+			        - COALESCE ( Previous_Year_Units_Sold, 0 )
 			RETURN
 			    /*
 			        SWITCH: Evaluates multiple conditions and returns one of several result expressions.
@@ -719,15 +727,14 @@ table Model_Measures
 			        of YoY_Change_Absolute. This structure checks each condition in sequence.
 			    */
 			    SWITCH (
-			        TRUE(),
+			        TRUE (),
 			        // Condition 1: Units Sold increased (Green) - Favorable volume performance
-			        YoY_Change_Absolute > 0, "#00A650", 
+			        YoY_Change_Absolute > 0, "#00A650",
 			        // Condition 2: Units Sold decreased (Red) - Unfavorable volume performance
-			        YoY_Change_Absolute < 0, "#E60000", 
+			        YoY_Change_Absolute < 0, "#E60000",
 			        // Condition 3: No change, zero, or BLANK (Gray) - Neutral volume performance
-			        "#7F8C8D" 
+			        "#7F8C8D"
 			    )
-			```
 		displayFolder: units sold
 		lineageTag: 5a1b6d46-8648-4c3f-ac57-cf74ef3246a2
 
@@ -744,13 +751,12 @@ table Model_Measures
 			    VAR: Used to declare variables that store intermediate calculation results.
 			    This improves performance by calculating values once and reusing them.
 			*/
-			VAR Current_Sales = 
-			    /*
+			VAR Current_Sales = /*
 			        Retrieves the Sales value for the current filter context (e.g., for the current month/row).
 			        This is evaluated in the context of each row in the visual and represents the sales
 			        for that specific period.
 			    */
-			    [Sales]
+			[Sales]
 			VAR Max_Sales_Value =
 			    /*
 			        MAXX: An iterator function that scans through a table and returns the maximum value
@@ -764,8 +770,10 @@ table Model_Measures
 			        currently selected in the report. The variable is computed once and reused for
 			        all row comparisons, providing significant performance optimization.
 			    */
-			    MAXX ( ALLSELECTED ( 'Dates Optimized' ), [Sales] )
-			
+			    MAXX (
+			        ALLSELECTED ( 'Dates Optimized' ),
+			        [Sales]
+			    )
 			RETURN
 			    /*
 			        Two-layer conditional logic to control the final output:
@@ -820,13 +828,12 @@ table Model_Measures
 			    VAR: Used to declare variables that store intermediate calculation results.
 			    This improves performance by calculating values once and reusing them.
 			*/
-			VAR Current_Sales = 
-			    /*
+			VAR Current_Sales = /*
 			        Retrieves the Sales value for the current filter context (e.g., for the current month/row).
 			        This is evaluated in the context of each row in the visual and represents the sales
 			        for that specific period.
 			    */
-			    [Sales]
+			[Sales]
 			VAR Min_Sales_Value =
 			    /*
 			        MINX: An iterator function that scans through a table and returns the minimum value
@@ -840,8 +847,10 @@ table Model_Measures
 			        currently selected in the report. The variable is computed once and reused for
 			        all row comparisons, providing significant performance optimization.
 			    */
-			    MINX ( ALLSELECTED ( 'Dates Optimized' ), [Sales] )
-			
+			    MINX (
+			        ALLSELECTED ( 'Dates Optimized' ),
+			        [Sales]
+			    )
 			RETURN
 			    /*
 			        Two-layer conditional logic to control the final output:
@@ -897,12 +906,11 @@ table Model_Measures
 			    VAR: Used to declare variables that store intermediate calculation results.
 			    This improves performance and code readability.
 			*/
-			VAR Current_COGS = 
-			    /*
+			VAR Current_COGS = /*
 			        Retrieves the COGS value for the current filter context (e.g., for the current month/row).
 			        This is evaluated in the context of each row in the visual.
 			    */
-			    [COGS]
+			[COGS]
 			VAR Max_COGS_Value =
 			    /*
 			        MAXX: An iterator function that iterates over a table and returns the maximum value
@@ -916,8 +924,10 @@ table Model_Measures
 			        currently selected/visible in the report, regardless of the current row context.
 			        This variable is computed once and reused, improving performance.
 			    */
-			    MAXX ( ALLSELECTED ( 'Dates Optimized' ), [COGS] )
-			
+			    MAXX (
+			        ALLSELECTED ( 'Dates Optimized' ),
+			        [COGS]
+			    )
 			RETURN
 			    /*
 			        Two-layer IF statement to control the final output:
@@ -969,12 +979,11 @@ table Model_Measures
 			    VAR: Used to declare variables that store intermediate calculation results.
 			    This improves performance by calculating values once and reusing them.
 			*/
-			VAR Current_COGS = 
-			    /*
+			VAR Current_COGS = /*
 			        Retrieves the COGS value for the current filter context (e.g., for the current month/row).
 			        This is evaluated in the context of each row in the visual.
 			    */
-			    [COGS]
+			[COGS]
 			VAR Min_COGS_Value =
 			    /*
 			        MINX: An iterator function that iterates over a table and returns the minimum value
@@ -988,8 +997,10 @@ table Model_Measures
 			        currently selected/visible in the report. The variable is computed once and
 			        reused for all row comparisons, providing significant performance optimization.
 			    */
-			    MINX ( ALLSELECTED ( 'Dates Optimized' ), [COGS] )
-			
+			    MINX (
+			        ALLSELECTED ( 'Dates Optimized' ),
+			        [COGS]
+			    )
 			RETURN
 			    /*
 			        Two-layer IF statement to control the final output:
@@ -1043,13 +1054,12 @@ table Model_Measures
 			    VAR: Used to declare variables that store intermediate calculation results.
 			    This improves performance by calculating values once and reusing them.
 			*/
-			VAR Current_Profit = 
-			    /*
+			VAR Current_Profit = /*
 			        Retrieves the Profit value for the current filter context (e.g., for the current month/row).
 			        This is evaluated in the context of each row in the visual and represents the profit
 			        for that specific period.
 			    */
-			    [Profit]
+			[Profit]
 			VAR Max_Profit_Value =
 			    /*
 			        MAXX: An iterator function that scans through a table and returns the maximum value
@@ -1064,8 +1074,10 @@ table Model_Measures
 			        all row comparisons, providing significant performance optimization, especially
 			        in large datasets.
 			    */
-			    MAXX ( ALLSELECTED ( 'Dates Optimized' ), [Profit] )
-			
+			    MAXX (
+			        ALLSELECTED ( 'Dates Optimized' ),
+			        [Profit]
+			    )
 			RETURN
 			    /*
 			        Two-layer conditional logic to control the final output:
@@ -1120,13 +1132,12 @@ table Model_Measures
 			    VAR: Used to declare variables that store intermediate calculation results.
 			    This improves performance by calculating values once and reusing them.
 			*/
-			VAR Current_Profit = 
-			    /*
+			VAR Current_Profit = /*
 			        Retrieves the Profit value for the current filter context (e.g., for the current month/row).
 			        This is evaluated in the context of each row in the visual and represents the profit
 			        for that specific period.
 			    */
-			    [Profit]
+			[Profit]
 			VAR Min_Profit_Value =
 			    /*
 			        MINX: An iterator function that scans through a table and returns the minimum value
@@ -1140,8 +1151,10 @@ table Model_Measures
 			        currently selected in the report. The variable is computed once and reused for
 			        all row comparisons, providing significant performance optimization.
 			    */
-			    MINX ( ALLSELECTED ( 'Dates Optimized' ), [Profit] )
-			
+			    MINX (
+			        ALLSELECTED ( 'Dates Optimized' ),
+			        [Profit]
+			    )
 			RETURN
 			    /*
 			        Two-layer conditional logic to control the final output:
@@ -1196,13 +1209,12 @@ table Model_Measures
 			    VAR: Used to declare variables that store intermediate calculation results.
 			    This improves performance by calculating values once and reusing them.
 			*/
-			VAR Current_Units_Sold = 
-			    /*
+			VAR Current_Units_Sold = /*
 			        Retrieves the Units Sold value for the current filter context (e.g., for the current month/row).
 			        This is evaluated in the context of each row in the visual and represents the units sold
 			        for that specific period.
 			    */
-			    [Units Sold]
+			[Units Sold]
 			VAR Max_Units_Sold_Value =
 			    /*
 			        MAXX: An iterator function that scans through a table and returns the maximum value
@@ -1216,8 +1228,10 @@ table Model_Measures
 			        currently selected in the report. The variable is computed once and reused for
 			        all row comparisons, providing significant performance optimization.
 			    */
-			    MAXX ( ALLSELECTED ( 'Dates Optimized' ), [Units Sold] )
-			
+			    MAXX (
+			        ALLSELECTED ( 'Dates Optimized' ),
+			        [Units Sold]
+			    )
 			RETURN
 			    /*
 			        Two-layer conditional logic to control the final output:
@@ -1272,13 +1286,12 @@ table Model_Measures
 			    VAR: Used to declare variables that store intermediate calculation results.
 			    This improves performance by calculating values once and reusing them.
 			*/
-			VAR Current_Units_Sold = 
-			    /*
+			VAR Current_Units_Sold = /*
 			        Retrieves the Units Sold value for the current filter context (e.g., for the current month/row).
 			        This is evaluated in the context of each row in the visual and represents the units sold
 			        for that specific period.
 			    */
-			    [Units Sold]
+			[Units Sold]
 			VAR Min_Units_Sold_Value =
 			    /*
 			        MINX: An iterator function that scans through a table and returns the minimum value
@@ -1292,8 +1305,10 @@ table Model_Measures
 			        currently selected in the report. The variable is computed once and reused for
 			        all row comparisons, providing significant performance optimization.
 			    */
-			    MINX ( ALLSELECTED ( 'Dates Optimized' ), [Units Sold] )
-			
+			    MINX (
+			        ALLSELECTED ( 'Dates Optimized' ),
+			        [Units Sold]
+			    )
 			RETURN
 			    /*
 			        Two-layer conditional logic to control the final output:
@@ -1385,7 +1400,8 @@ table Model_Measures
 			        for a specific time zone offset (e.g., UTC+1 for Central European Time).
 			        Note: If pure UTC is needed without offset, remove the TIME addition.
 			    */
-			    UTCNOW () + TIME ( 1, 0, 0 )
+			    UTCNOW ()
+			        + TIME ( 1, 0, 0 )
 			VAR Formatted_Timestamp =
 			    FORMAT (
 			        UTC_Timestamp,
@@ -1436,15 +1452,16 @@ table Model_Measures
 			        SELECTEDVALUE: Captures the currently selected Product from filters/slicers.
 			        Used to build descriptive text about the current filter context.
 			    */
-			    SELECTEDVALUE ( financials[Product] )
-			
-			// 1. Performance Calculations (IFERROR Stabilization):
+			    SELECTEDVALUE ( financials[Product] ) // 1. Performance Calculations (IFERROR Stabilization):
 			VAR Current_Sales =
 			    /*
 			        IFERROR: Wraps the base Sales measure to handle any calculation errors gracefully.
 			        Returns BLANK() instead of an error, making the measure more robust.
 			    */
-			    IFERROR ( [Sales], BLANK () )
+			    IFERROR (
+			        [Sales],
+			        BLANK ()
+			    )
 			VAR Grand_Total_Sales_In_Year =
 			    /*
 			        CALCULATE with REMOVEFILTERS and ALL: Calculates the total Sales for the entire dataset.
@@ -1465,34 +1482,46 @@ table Model_Measures
 			    CALCULATE (
 			        IFERROR ( [Sales], BLANK () ),
 			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] )
-			    )
-			
-			// 2. Change Calculations and Formatting
+			    ) // 2. Change Calculations and Formatting
 			VAR Share_Percentage =
 			    /*
-			        DIVIDE: Safely calculates the percentage share of current Sales relative to grand total.
+			        DIVIDE: Safely calculates the percentage share of current Sales relative to Previous Year Sales.
 			        Returns BLANK() if division by zero occurs.
 			    */
-			    DIVIDE ( Current_Sales, Grand_Total_Sales_In_Year, BLANK () )
+			    DIVIDE (
+			        Current_Sales,
+			        Previous_Year_Sales,
+			        BLANK ()
+			    ) - 1
 			VAR YoY_Absolute_Change =
 			    /*
 			        COALESCE: Replaces BLANK values with 0 to ensure correct arithmetic operations.
 			        Calculates the absolute change in Sales compared to previous year.
 			    */
-			    COALESCE ( Current_Sales, 0 ) - COALESCE ( Previous_Year_Sales, 0 )
+			    COALESCE (
+			        Current_Sales,
+			        0
+			    )
+			        - COALESCE ( Previous_Year_Sales, 0 )
 			VAR YoY_Absolute_Change_Millions =
 			    /*
 			        DIVIDE: Converts the absolute change to millions for better readability.
 			        Returns BLANK() if division fails.
 			    */
-			    DIVIDE ( YoY_Absolute_Change, 1000000, BLANK () )
+			    DIVIDE (
+			        YoY_Absolute_Change,
+			        1000000,
+			        BLANK ()
+			    )
 			VAR Previous_Sales_Millions =
 			    /*
 			        DIVIDE: Converts previous year Sales to millions for consistent formatting.
 			    */
-			    DIVIDE ( Previous_Year_Sales, 1000000, BLANK () )
-			
-			// 3. Text Logic (Filters/Symbols):
+			    DIVIDE (
+			        Previous_Year_Sales,
+			        1000000,
+			        BLANK ()
+			    ) // 3. Text Logic (Filters/Symbols):
 			VAR Arrow_Symbol =
 			    /*
 			        Nested IF statements to determine the appropriate arrow symbol:
@@ -1503,8 +1532,13 @@ table Model_Measures
 			    */
 			    IF (
 			        YoY_Absolute_Change > 0,
-			        UNICHAR ( 11165 ), // Up arrow for sales increase (good)
-			        IF ( YoY_Absolute_Change < 0, UNICHAR ( 11167 ), BLANK () ) // Down arrow or BLANK
+			        UNICHAR ( 11165 ),
+			        // Up arrow for sales increase (good)
+			        IF (
+			            YoY_Absolute_Change < 0,
+			            UNICHAR ( 11167 ),
+			            BLANK ()
+			        ) // Down arrow or BLANK
 			    )
 			VAR Segment_Text_Fragment =
 			    /*
@@ -1547,35 +1581,28 @@ table Model_Measures
 			    TRIM (
 			        COALESCE ( Segment_Text_Fragment, "" ) & COALESCE ( Separator_Text_Filter, "" )
 			            & COALESCE ( Product_Text_Fragment, "" )
-			    )
-			
-			// 4. Conditional KPI Text Creation (NO NOMINAL VALUE):
+			    ) // 4. Conditional KPI Text Creation (NO NOMINAL VALUE):
 			// Element A: Symbol (first in sequence)
 			VAR Arrow_Fragment =
-			    COALESCE ( Arrow_Symbol, "" )
-			// Element B: PY Value
+			    COALESCE ( Arrow_Symbol, "" ) // Element B: PY Value
 			VAR PY_Fragment =
 			    IF (
 			        NOT ISBLANK ( Previous_Sales_Millions ),
 			        "PY: " & FORMAT ( Previous_Sales_Millions, "#,##0.00" ) & "M",
 			        BLANK ()
-			    )
-			// Element C: YoY Value
+			    ) // Element C: YoY Value
 			VAR YoY_Fragment_Text =
 			    IF (
 			        NOT ISBLANK ( YoY_Absolute_Change_Millions ),
 			        "YoY: " & FORMAT ( YoY_Absolute_Change_Millions, "#,##0.00" ) & "M",
 			        BLANK ()
-			    )
-			// Element D: Share %
+			    ) // Element D: Share %
 			VAR Share_Fragment =
 			    IF (
 			        NOT ISBLANK ( Share_Percentage ),
 			        FORMAT ( Share_Percentage, "0.00%" ),
 			        BLANK ()
-			    )
-			
-			// Concatenating values in the parenthesis: (Symbol | PY | YoY | Share)
+			    ) // Concatenating values in the parenthesis: (Symbol | PY | YoY | Share)
 			VAR Inner_KPI_Text =
 			    /*
 			        Complex string concatenation with conditional separators.
@@ -1583,7 +1610,10 @@ table Model_Measures
 			        output like " |  | value" when some elements are missing.
 			        This ensures clean output regardless of which metrics are available.
 			    */
-			    COALESCE ( Arrow_Fragment, "" )
+			    COALESCE (
+			        Arrow_Fragment,
+			        ""
+			    )
 			        & IF (
 			            NOT ISBLANK ( Arrow_Fragment ) && NOT ISBLANK ( PY_Fragment ),
 			            " | ",
@@ -1604,14 +1634,16 @@ table Model_Measures
 			            BLANK ()
 			        )
 			        & COALESCE ( Share_Fragment, "" )
-			
 			VAR KPI_Text =
 			    /*
 			        Wraps the inner KPI text in parentheses, but only if there's current Sales data.
 			        This ensures we don't show performance metrics when there's no underlying sales data.
 			    */
-			    IF ( NOT ISBLANK ( Current_Sales ), " (" & Inner_KPI_Text & ")", BLANK () )
-			
+			    IF (
+			        NOT ISBLANK ( Current_Sales ),
+			        " (" & Inner_KPI_Text & ")",
+			        BLANK ()
+			    )
 			RETURN
 			    /*
 			        Final combination: Filter description text + KPI information in parentheses.
@@ -1619,7 +1651,11 @@ table Model_Measures
 			        The result provides complete context about both what is being viewed (filters)
 			        and how it's performing (KPI metrics).
 			    */
-			    COALESCE ( Filter_Texts, "" ) & COALESCE ( KPI_Text, "" )
+			    COALESCE (
+			        Filter_Texts,
+			        ""
+			    )
+			        & COALESCE ( KPI_Text, "" )
 		displayFolder: sales
 		lineageTag: 2f6598a3-eb90-424a-b134-06350f857fca
 
@@ -1647,15 +1683,16 @@ table Model_Measures
 			        SELECTEDVALUE: Captures the currently selected Product from filters/slicers.
 			        Used to build descriptive text about the current filter context.
 			    */
-			    SELECTEDVALUE ( financials[Product] )
-			
-			// 1. Performance Calculations (IFERROR Stabilization):
+			    SELECTEDVALUE ( financials[Product] ) // 1. Performance Calculations (IFERROR Stabilization):
 			VAR Current_COGS =
 			    /*
 			        IFERROR: Wraps the base COGS measure to handle any calculation errors gracefully.
 			        Returns BLANK() instead of an error, making the measure more robust.
 			    */
-			    IFERROR ( [COGS], BLANK () )
+			    IFERROR (
+			        [COGS],
+			        BLANK ()
+			    )
 			VAR Grand_Total_COGS_In_Year =
 			    /*
 			        CALCULATE with REMOVEFILTERS and ALL: Calculates the total COGS for the entire dataset.
@@ -1676,34 +1713,46 @@ table Model_Measures
 			    CALCULATE (
 			        IFERROR ( [COGS], BLANK () ),
 			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] )
-			    )
-			
-			// 2. Change Calculations and Formatting
+			    ) // 2. Change Calculations and Formatting
 			VAR Share_Percentage =
 			    /*
-			        DIVIDE: Safely calculates the percentage share of current COGS relative to grand total.
+			        DIVIDE: Safely calculates the percentage share of current COGS relative to Previous Year COGS.
 			        Returns BLANK() if division by zero occurs.
 			    */
-			    DIVIDE ( Current_COGS, Grand_Total_COGS_In_Year, BLANK () )
+			    DIVIDE (
+			        Current_COGS,
+			        Previous_Year_COGS,
+			        BLANK ()
+			    ) - 1
 			VAR YoY_Absolute_Change =
 			    /*
 			        COALESCE: Replaces BLANK values with 0 to ensure correct arithmetic operations.
 			        Calculates the absolute change in COGS compared to previous year.
 			    */
-			    COALESCE ( Current_COGS, 0 ) - COALESCE ( Previous_Year_COGS, 0 )
+			    COALESCE (
+			        Current_COGS,
+			        0
+			    )
+			        - COALESCE ( Previous_Year_COGS, 0 )
 			VAR YoY_Absolute_Change_Millions =
 			    /*
 			        DIVIDE: Converts the absolute change to millions for better readability.
 			        Returns BLANK() if division fails.
 			    */
-			    DIVIDE ( YoY_Absolute_Change, 1000000, BLANK () )
+			    DIVIDE (
+			        YoY_Absolute_Change,
+			        1000000,
+			        BLANK ()
+			    )
 			VAR Previous_COGS_Millions =
 			    /*
 			        DIVIDE: Converts previous year COGS to millions for consistent formatting.
 			    */
-			    DIVIDE ( Previous_Year_COGS, 1000000, BLANK () )
-			
-			// 3. Text Logic (Filters/Symbols):
+			    DIVIDE (
+			        Previous_Year_COGS,
+			        1000000,
+			        BLANK ()
+			    ) // 3. Text Logic (Filters/Symbols):
 			VAR Arrow_Symbol =
 			    /*
 			        Nested IF statements to determine the appropriate arrow symbol:
@@ -1713,7 +1762,8 @@ table Model_Measures
 			    */
 			    IF (
 			        YoY_Absolute_Change < 0,
-			        UNICHAR ( 11167 ), // Down arrow
+			        UNICHAR ( 11167 ),
+			        // Down arrow
 			        IF ( YoY_Absolute_Change > 0, UNICHAR ( 11165 ), BLANK () ) // Up arrow or BLANK
 			    )
 			VAR Segment_Text_Fragment =
@@ -1757,42 +1807,38 @@ table Model_Measures
 			    TRIM (
 			        COALESCE ( Segment_Text_Fragment, "" ) & COALESCE ( Separator_Text_Filter, "" )
 			            & COALESCE ( Product_Text_Fragment, "" )
-			    )
-			
-			// 4. Conditional KPI Text Creation (NO NOMINAL VALUE):
+			    ) // 4. Conditional KPI Text Creation (NO NOMINAL VALUE):
 			// Element A: Symbol (first in sequence)
 			VAR Arrow_Fragment =
-			    COALESCE ( Arrow_Symbol, "" )
-			// Element B: PY Value
+			    COALESCE ( Arrow_Symbol, "" ) // Element B: PY Value
 			VAR PY_Fragment =
 			    IF (
 			        NOT ISBLANK ( Previous_COGS_Millions ),
 			        "PY: " & FORMAT ( Previous_COGS_Millions, "#,##0.00" ) & "M",
 			        BLANK ()
-			    )
-			// Element C: YoY Value
+			    ) // Element C: YoY Value
 			VAR YoY_Fragment_Text =
 			    IF (
 			        NOT ISBLANK ( YoY_Absolute_Change_Millions ),
 			        "YoY: " & FORMAT ( YoY_Absolute_Change_Millions, "#,##0.00" ) & "M",
 			        BLANK ()
-			    )
-			// Element D: Share %
+			    ) // Element D: Share %
 			VAR Share_Fragment =
 			    IF (
 			        NOT ISBLANK ( Share_Percentage ),
 			        FORMAT ( Share_Percentage, "0.00%" ),
 			        BLANK ()
-			    )
-			
-			// Concatenating values in the parenthesis: (Symbol | PY | YoY | Share)
+			    ) // Concatenating values in the parenthesis: (Symbol | PY | YoY | Share)
 			VAR Inner_KPI_Text =
 			    /*
 			        Complex string concatenation with conditional separators.
 			        Adds " | " separators only between non-blank elements to avoid
 			        output like " |  | value" when some elements are missing.
 			    */
-			    COALESCE ( Arrow_Fragment, "" )
+			    COALESCE (
+			        Arrow_Fragment,
+			        ""
+			    )
 			        & IF (
 			            NOT ISBLANK ( Arrow_Fragment ) && NOT ISBLANK ( PY_Fragment ),
 			            " | ",
@@ -1813,19 +1859,25 @@ table Model_Measures
 			            BLANK ()
 			        )
 			        & COALESCE ( Share_Fragment, "" )
-			
 			VAR KPI_Text =
 			    /*
 			        Wraps the inner KPI text in parentheses, but only if there's current COGS data.
 			    */
-			    IF ( NOT ISBLANK ( Current_COGS ), " (" & Inner_KPI_Text & ")", BLANK () )
-			
+			    IF (
+			        NOT ISBLANK ( Current_COGS ),
+			        " (" & Inner_KPI_Text & ")",
+			        BLANK ()
+			    )
 			RETURN
 			    /*
 			        Final combination: Filter description text + KPI information in parentheses.
 			        COALESCE ensures blank values are handled gracefully in the final string.
 			    */
-			    COALESCE ( Filter_Texts, "" ) & COALESCE ( KPI_Text, "" )
+			    COALESCE (
+			        Filter_Texts,
+			        ""
+			    )
+			        & COALESCE ( KPI_Text, "" )
 		displayFolder: cogs
 		lineageTag: 712cd02a-5c86-46bb-a7dd-cbf05ad0b242
 
@@ -1854,15 +1906,16 @@ table Model_Measures
 			        SELECTEDVALUE: Captures the currently selected Product from filters/slicers.
 			        Used to build descriptive text about the current filter context.
 			    */
-			    SELECTEDVALUE ( financials[Product] )
-			
-			// 1. Performance Calculations (IFERROR Stabilization):
+			    SELECTEDVALUE ( financials[Product] ) // 1. Performance Calculations (IFERROR Stabilization):
 			VAR Current_Profit =
 			    /*
 			        IFERROR: Wraps the base Profit measure to handle any calculation errors gracefully.
 			        Returns BLANK() instead of an error, making the measure more robust.
 			    */
-			    IFERROR ( [Profit], BLANK () )
+			    IFERROR (
+			        [Profit],
+			        BLANK ()
+			    )
 			VAR Grand_Total_Profit_In_Year =
 			    /*
 			        CALCULATE with REMOVEFILTERS and ALL: Calculates the total Profit for the entire dataset.
@@ -1883,34 +1936,46 @@ table Model_Measures
 			    CALCULATE (
 			        IFERROR ( [Profit], BLANK () ),
 			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] )
-			    )
-			
-			// 2. Change Calculations and Formatting
+			    ) // 2. Change Calculations and Formatting
 			VAR Share_Percentage =
 			    /*
-			        DIVIDE: Safely calculates the percentage share of current Profit relative to grand total.
+			        DIVIDE: Safely calculates the percentage share of current Profit relative to Previous Year Profit.
 			        Returns BLANK() if division by zero occurs.
 			    */
-			    DIVIDE ( Current_Profit, Grand_Total_Profit_In_Year, BLANK () )
+			    DIVIDE (
+			        Current_Profit,
+			        Previous_Year_Profit,
+			        BLANK ()
+			    ) - 1
 			VAR YoY_Absolute_Change =
 			    /*
 			        COALESCE: Replaces BLANK values with 0 to ensure correct arithmetic operations.
 			        Calculates the absolute change in Profit compared to previous year.
 			    */
-			    COALESCE ( Current_Profit, 0 ) - COALESCE ( Previous_Year_Profit, 0 )
+			    COALESCE (
+			        Current_Profit,
+			        0
+			    )
+			        - COALESCE ( Previous_Year_Profit, 0 )
 			VAR YoY_Absolute_Change_Millions =
 			    /*
 			        DIVIDE: Converts the absolute change to millions for better readability.
 			        Returns BLANK() if division fails.
 			    */
-			    DIVIDE ( YoY_Absolute_Change, 1000000, BLANK () )
+			    DIVIDE (
+			        YoY_Absolute_Change,
+			        1000000,
+			        BLANK ()
+			    )
 			VAR Previous_Profit_Millions =
 			    /*
 			        DIVIDE: Converts previous year Profit to millions for consistent formatting.
 			    */
-			    DIVIDE ( Previous_Year_Profit, 1000000, BLANK () )
-			
-			// 3. Text Logic (Filters/Symbols):
+			    DIVIDE (
+			        Previous_Year_Profit,
+			        1000000,
+			        BLANK ()
+			    ) // 3. Text Logic (Filters/Symbols):
 			VAR Arrow_Symbol =
 			    /*
 			        Nested IF statements to determine the appropriate arrow symbol:
@@ -1921,8 +1986,13 @@ table Model_Measures
 			    */
 			    IF (
 			        YoY_Absolute_Change > 0,
-			        UNICHAR ( 11165 ), // Up arrow for profit increase (good)
-			        IF ( YoY_Absolute_Change < 0, UNICHAR ( 11167 ), BLANK () ) // Down arrow or BLANK
+			        UNICHAR ( 11165 ),
+			        // Up arrow for profit increase (good)
+			        IF (
+			            YoY_Absolute_Change < 0,
+			            UNICHAR ( 11167 ),
+			            BLANK ()
+			        ) // Down arrow or BLANK
 			    )
 			VAR Segment_Text_Fragment =
 			    /*
@@ -1965,35 +2035,28 @@ table Model_Measures
 			    TRIM (
 			        COALESCE ( Segment_Text_Fragment, "" ) & COALESCE ( Separator_Text_Filter, "" )
 			            & COALESCE ( Product_Text_Fragment, "" )
-			    )
-			
-			// 4. Conditional KPI Text Creation (NO NOMINAL VALUE):
+			    ) // 4. Conditional KPI Text Creation (NO NOMINAL VALUE):
 			// Element A: Symbol (first in sequence)
 			VAR Arrow_Fragment =
-			    COALESCE ( Arrow_Symbol, "" )
-			// Element B: PY Value
+			    COALESCE ( Arrow_Symbol, "" ) // Element B: PY Value
 			VAR PY_Fragment =
 			    IF (
 			        NOT ISBLANK ( Previous_Profit_Millions ),
 			        "PY: " & FORMAT ( Previous_Profit_Millions, "#,##0.00" ) & "M",
 			        BLANK ()
-			    )
-			// Element C: YoY Value
+			    ) // Element C: YoY Value
 			VAR YoY_Fragment_Text =
 			    IF (
 			        NOT ISBLANK ( YoY_Absolute_Change_Millions ),
 			        "YoY: " & FORMAT ( YoY_Absolute_Change_Millions, "#,##0.00" ) & "M",
 			        BLANK ()
-			    )
-			// Element D: Share %
+			    ) // Element D: Share %
 			VAR Share_Fragment =
 			    IF (
 			        NOT ISBLANK ( Share_Percentage ),
 			        FORMAT ( Share_Percentage, "0.00%" ),
 			        BLANK ()
-			    )
-			
-			// Concatenating values in the parenthesis: (Symbol | PY | YoY | Share)
+			    ) // Concatenating values in the parenthesis: (Symbol | PY | YoY | Share)
 			VAR Inner_KPI_Text =
 			    /*
 			        Complex string concatenation with conditional separators.
@@ -2001,7 +2064,10 @@ table Model_Measures
 			        output like " |  | value" when some elements are missing.
 			        This ensures clean output regardless of which metrics are available.
 			    */
-			    COALESCE ( Arrow_Fragment, "" )
+			    COALESCE (
+			        Arrow_Fragment,
+			        ""
+			    )
 			        & IF (
 			            NOT ISBLANK ( Arrow_Fragment ) && NOT ISBLANK ( PY_Fragment ),
 			            " | ",
@@ -2022,14 +2088,16 @@ table Model_Measures
 			            BLANK ()
 			        )
 			        & COALESCE ( Share_Fragment, "" )
-			
 			VAR KPI_Text =
 			    /*
 			        Wraps the inner KPI text in parentheses, but only if there's current Profit data.
 			        This ensures we don't show performance metrics when there's no underlying profit data.
 			    */
-			    IF ( NOT ISBLANK ( Current_Profit ), " (" & Inner_KPI_Text & ")", BLANK () )
-			
+			    IF (
+			        NOT ISBLANK ( Current_Profit ),
+			        " (" & Inner_KPI_Text & ")",
+			        BLANK ()
+			    )
 			RETURN
 			    /*
 			        Final combination: Filter description text + KPI information in parentheses.
@@ -2037,7 +2105,11 @@ table Model_Measures
 			        The result provides complete context about both what is being viewed (filters)
 			        and how it's performing (KPI metrics).
 			    */
-			    COALESCE ( Filter_Texts, "" ) & COALESCE ( KPI_Text, "" )
+			    COALESCE (
+			        Filter_Texts,
+			        ""
+			    )
+			        & COALESCE ( KPI_Text, "" )
 		displayFolder: profit
 		lineageTag: c4995597-851c-4da0-bb41-03f8b5c4eedd
 
@@ -2066,15 +2138,16 @@ table Model_Measures
 			        SELECTEDVALUE: Captures the currently selected Product from filters/slicers.
 			        Used to build descriptive text about the current filter context.
 			    */
-			    SELECTEDVALUE ( financials[Product] )
-			
-			// 1. Performance Calculations (IFERROR Stabilization):
+			    SELECTEDVALUE ( financials[Product] ) // 1. Performance Calculations (IFERROR Stabilization):
 			VAR Current_Units_Sold =
 			    /*
 			        IFERROR: Wraps the base Units Sold measure to handle any calculation errors gracefully.
 			        Returns BLANK() instead of an error, making the measure more robust.
 			    */
-			    IFERROR ( [Units Sold], BLANK () )
+			    IFERROR (
+			        [Units Sold],
+			        BLANK ()
+			    )
 			VAR Grand_Total_Units_Sold_In_Year =
 			    /*
 			        CALCULATE with REMOVEFILTERS and ALL: Calculates the total Units Sold for the entire dataset.
@@ -2095,34 +2168,46 @@ table Model_Measures
 			    CALCULATE (
 			        IFERROR ( [Units Sold], BLANK () ),
 			        SAMEPERIODLASTYEAR ( 'Dates Optimized'[Date] )
-			    )
-			
-			// 2. Change Calculations and Formatting
+			    ) // 2. Change Calculations and Formatting
 			VAR Share_Percentage =
 			    /*
-			        DIVIDE: Safely calculates the percentage share of current Units Sold relative to grand total.
+			        DIVIDE: Safely calculates the percentage share of current Units Sold relative to Previous Year Units Sold.
 			        Returns BLANK() if division by zero occurs.
 			    */
-			    DIVIDE ( Current_Units_Sold, Grand_Total_Units_Sold_In_Year, BLANK () )
+			    DIVIDE (
+			        Current_Units_Sold,
+			        Previous_Year_Units_Sold,
+			        BLANK ()
+			    ) - 1
 			VAR YoY_Absolute_Change =
 			    /*
 			        COALESCE: Replaces BLANK values with 0 to ensure correct arithmetic operations.
 			        Calculates the absolute change in Units Sold compared to previous year.
 			    */
-			    COALESCE ( Current_Units_Sold, 0 ) - COALESCE ( Previous_Year_Units_Sold, 0 )
-			VAR YoY_Absolute_Change_Millions =
+			    COALESCE (
+			        Current_Units_Sold,
+			        0
+			    )
+			        - COALESCE ( Previous_Year_Units_Sold, 0 )
+			VAR YoY_Absolute_Change_Thousands =
 			    /*
 			        DIVIDE: Converts the absolute change to millions for better readability.
 			        Returns BLANK() if division fails.
 			    */
-			    DIVIDE ( YoY_Absolute_Change, 1000000, BLANK () )
-			VAR Previous_Units_Sold_Millions =
+			    DIVIDE (
+			        YoY_Absolute_Change,
+			        1000,
+			        BLANK ()
+			    )
+			VAR Previous_Units_Sold_Thousands =
 			    /*
-			        DIVIDE: Converts previous year Units Sold to millions for consistent formatting.
+			        DIVIDE: Converts previous year Units Sold to thousands for consistent formatting.
 			    */
-			    DIVIDE ( Previous_Year_Units_Sold, 1000000, BLANK () )
-			
-			// 3. Text Logic (Filters/Symbols):
+			    DIVIDE (
+			        Previous_Year_Units_Sold,
+			        1000,
+			        BLANK ()
+			    ) // 3. Text Logic (Filters/Symbols):
 			VAR Arrow_Symbol =
 			    /*
 			        Nested IF statements to determine the appropriate arrow symbol:
@@ -2133,8 +2218,13 @@ table Model_Measures
 			    */
 			    IF (
 			        YoY_Absolute_Change > 0,
-			        UNICHAR ( 11165 ), // Up arrow for volume increase (good)
-			        IF ( YoY_Absolute_Change < 0, UNICHAR ( 11167 ), BLANK () ) // Down arrow or BLANK
+			        UNICHAR ( 11165 ),
+			        // Up arrow for volume increase (good)
+			        IF (
+			            YoY_Absolute_Change < 0,
+			            UNICHAR ( 11167 ),
+			            BLANK ()
+			        ) // Down arrow or BLANK
 			    )
 			VAR Segment_Text_Fragment =
 			    /*
@@ -2177,35 +2267,28 @@ table Model_Measures
 			    TRIM (
 			        COALESCE ( Segment_Text_Fragment, "" ) & COALESCE ( Separator_Text_Filter, "" )
 			            & COALESCE ( Product_Text_Fragment, "" )
-			    )
-			
-			// 4. Conditional KPI Text Creation (NO NOMINAL VALUE):
+			    ) // 4. Conditional KPI Text Creation (NO NOMINAL VALUE):
 			// Element A: Symbol (first in sequence)
 			VAR Arrow_Fragment =
-			    COALESCE ( Arrow_Symbol, "" )
-			// Element B: PY Value
+			    COALESCE ( Arrow_Symbol, "" ) // Element B: PY Value
 			VAR PY_Fragment =
 			    IF (
-			        NOT ISBLANK ( Previous_Units_Sold_Millions ),
-			        "PY: " & FORMAT ( Previous_Units_Sold_Millions, "#,##0.00" ) & "M",
+			        NOT ISBLANK ( Previous_Units_Sold_Thousands ),
+			        "PY: " & FORMAT ( Previous_Units_Sold_Thousands, "#,##0.00" ) & "K",
 			        BLANK ()
-			    )
-			// Element C: YoY Value
+			    ) // Element C: YoY Value
 			VAR YoY_Fragment_Text =
 			    IF (
-			        NOT ISBLANK ( YoY_Absolute_Change_Millions ),
-			        "YoY: " & FORMAT ( YoY_Absolute_Change_Millions, "#,##0.00" ) & "M",
+			        NOT ISBLANK ( YoY_Absolute_Change_Thousands ),
+			        "YoY: " & FORMAT ( YoY_Absolute_Change_Thousands, "#,##0.00" ) & "K",
 			        BLANK ()
-			    )
-			// Element D: Share %
+			    ) // Element D: Share %
 			VAR Share_Fragment =
 			    IF (
 			        NOT ISBLANK ( Share_Percentage ),
 			        FORMAT ( Share_Percentage, "0.00%" ),
 			        BLANK ()
-			    )
-			
-			// Concatenating values in the parenthesis: (Symbol | PY | YoY | Share)
+			    ) // Concatenating values in the parenthesis: (Symbol | PY | YoY | Share)
 			VAR Inner_KPI_Text =
 			    /*
 			        Complex string concatenation with conditional separators.
@@ -2213,7 +2296,10 @@ table Model_Measures
 			        output like " |  | value" when some elements are missing.
 			        This ensures clean output regardless of which metrics are available.
 			    */
-			    COALESCE ( Arrow_Fragment, "" )
+			    COALESCE (
+			        Arrow_Fragment,
+			        ""
+			    )
 			        & IF (
 			            NOT ISBLANK ( Arrow_Fragment ) && NOT ISBLANK ( PY_Fragment ),
 			            " | ",
@@ -2234,14 +2320,16 @@ table Model_Measures
 			            BLANK ()
 			        )
 			        & COALESCE ( Share_Fragment, "" )
-			
 			VAR KPI_Text =
 			    /*
 			        Wraps the inner KPI text in parentheses, but only if there's current Units Sold data.
 			        This ensures we don't show performance metrics when there's no underlying volume data.
 			    */
-			    IF ( NOT ISBLANK ( Current_Units_Sold ), " (" & Inner_KPI_Text & ")", BLANK () )
-			
+			    IF (
+			        NOT ISBLANK ( Current_Units_Sold ),
+			        " (" & Inner_KPI_Text & ")",
+			        BLANK ()
+			    )
 			RETURN
 			    /*
 			        Final combination: Filter description text + KPI information in parentheses.
@@ -2249,235 +2337,404 @@ table Model_Measures
 			        The result provides complete context about both what is being viewed (filters)
 			        and how it's performing (KPI metrics for sales volume).
 			    */
-			    COALESCE ( Filter_Texts, "" ) & COALESCE ( KPI_Text, "" )
+			    COALESCE (
+			        Filter_Texts,
+			        ""
+			    )
+			        & COALESCE ( KPI_Text, "" )
 		displayFolder: units sold
 		lineageTag: f67521f2-267f-4349-abd9-746c50c3e94d
 
-	measure DumpFilters = ```
+	measure DumpFilters =
 			
 			VAR MaxFilters = 3
 			RETURN
-			"DumpFilters: " &
-			IF ( 
-			    ISFILTERED ( 'Dates Optimized'[Date] ), 
-			    VAR ___f = FILTERS ( 'Dates Optimized'[Date] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, 'Dates Optimized'[Date] )
-			    VAR ___d = CONCATENATEX ( ___t, 'Dates Optimized'[Date], ", " )
-			    VAR ___x = "'Dates Optimized'[Date] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( 'Dates Optimized'[Month] ), 
-			    VAR ___f = FILTERS ( 'Dates Optimized'[Month] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, 'Dates Optimized'[Month] )
-			    VAR ___d = CONCATENATEX ( ___t, 'Dates Optimized'[Month], ", " )
-			    VAR ___x = "'Dates Optimized'[Month] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( 'Dates Optimized'[Month Name] ), 
-			    VAR ___f = FILTERS ( 'Dates Optimized'[Month Name] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, 'Dates Optimized'[Month Name] )
-			    VAR ___d = CONCATENATEX ( ___t, 'Dates Optimized'[Month Name], ", " )
-			    VAR ___x = "'Dates Optimized'[Month Name] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( 'Dates Optimized'[Month Name Full] ), 
-			    VAR ___f = FILTERS ( 'Dates Optimized'[Month Name Full] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, 'Dates Optimized'[Month Name Full] )
-			    VAR ___d = CONCATENATEX ( ___t, 'Dates Optimized'[Month Name Full], ", " )
-			    VAR ___x = "'Dates Optimized'[Month Name Full] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( 'Dates Optimized'[Quarter] ), 
-			    VAR ___f = FILTERS ( 'Dates Optimized'[Quarter] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, 'Dates Optimized'[Quarter] )
-			    VAR ___d = CONCATENATEX ( ___t, 'Dates Optimized'[Quarter], ", " )
-			    VAR ___x = "'Dates Optimized'[Quarter] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( 'Dates Optimized'[Year] ), 
-			    VAR ___f = FILTERS ( 'Dates Optimized'[Year] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, 'Dates Optimized'[Year] )
-			    VAR ___d = CONCATENATEX ( ___t, 'Dates Optimized'[Year], ", " )
-			    VAR ___x = "'Dates Optimized'[Year] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( 'Dates Optimized'[YearMonthKey] ), 
-			    VAR ___f = FILTERS ( 'Dates Optimized'[YearMonthKey] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, 'Dates Optimized'[YearMonthKey] )
-			    VAR ___d = CONCATENATEX ( ___t, 'Dates Optimized'[YearMonthKey], ", " )
-			    VAR ___x = "'Dates Optimized'[YearMonthKey] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[COGS] ), 
-			    VAR ___f = FILTERS ( financials[COGS] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[COGS] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[COGS], ", " )
-			    VAR ___x = "financials[COGS] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[Country] ), 
-			    VAR ___f = FILTERS ( financials[Country] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[Country] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[Country], ", " )
-			    VAR ___x = "financials[Country] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[Date] ), 
-			    VAR ___f = FILTERS ( financials[Date] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[Date] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[Date], ", " )
-			    VAR ___x = "financials[Date] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[Discount Band] ), 
-			    VAR ___f = FILTERS ( financials[Discount Band] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[Discount Band] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[Discount Band], ", " )
-			    VAR ___x = "financials[Discount Band] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[Discounts] ), 
-			    VAR ___f = FILTERS ( financials[Discounts] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[Discounts] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[Discounts], ", " )
-			    VAR ___x = "financials[Discounts] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[Gross Sales] ), 
-			    VAR ___f = FILTERS ( financials[Gross Sales] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[Gross Sales] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[Gross Sales], ", " )
-			    VAR ___x = "financials[Gross Sales] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[Manufacturing Price] ), 
-			    VAR ___f = FILTERS ( financials[Manufacturing Price] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[Manufacturing Price] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[Manufacturing Price], ", " )
-			    VAR ___x = "financials[Manufacturing Price] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[Month Name] ), 
-			    VAR ___f = FILTERS ( financials[Month Name] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[Month Name] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[Month Name], ", " )
-			    VAR ___x = "financials[Month Name] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[Month Number] ), 
-			    VAR ___f = FILTERS ( financials[Month Number] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[Month Number] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[Month Number], ", " )
-			    VAR ___x = "financials[Month Number] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[Product] ), 
-			    VAR ___f = FILTERS ( financials[Product] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[Product] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[Product], ", " )
-			    VAR ___x = "financials[Product] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[Profit] ), 
-			    VAR ___f = FILTERS ( financials[Profit] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[Profit] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[Profit], ", " )
-			    VAR ___x = "financials[Profit] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[Sale Price] ), 
-			    VAR ___f = FILTERS ( financials[Sale Price] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[Sale Price] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[Sale Price], ", " )
-			    VAR ___x = "financials[Sale Price] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[Sales] ), 
-			    VAR ___f = FILTERS ( financials[Sales] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[Sales] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[Sales], ", " )
-			    VAR ___x = "financials[Sales] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[Segment] ), 
-			    VAR ___f = FILTERS ( financials[Segment] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[Segment] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[Segment], ", " )
-			    VAR ___x = "financials[Segment] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[Units Sold] ), 
-			    VAR ___f = FILTERS ( financials[Units Sold] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[Units Sold] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[Units Sold], ", " )
-			    VAR ___x = "financials[Units Sold] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( financials[Year] ), 
-			    VAR ___f = FILTERS ( financials[Year] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, financials[Year] )
-			    VAR ___d = CONCATENATEX ( ___t, financials[Year], ", " )
-			    VAR ___x = "financials[Year] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
-			 & IF ( 
-			    ISFILTERED ( Model_Measures[Value] ), 
-			    VAR ___f = FILTERS ( Model_Measures[Value] ) 
-			    VAR ___r = COUNTROWS ( ___f ) 
-			    VAR ___t = TOPN ( MaxFilters, ___f, Model_Measures[Value] )
-			    VAR ___d = CONCATENATEX ( ___t, Model_Measures[Value], ", " )
-			    VAR ___x = "Model_Measures[Value] = " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " " 
-			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
-			)
+			    "DumpFilters: "
+			        & IF (
+			            ISFILTERED ( 'Dates Optimized'[Date] ),
+			            VAR ___f =
+			                FILTERS ( 'Dates Optimized'[Date] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, 'Dates Optimized'[Date] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, 'Dates Optimized'[Date], ", " )
+			            VAR ___x =
+			                "'Dates Optimized'[Date] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( 'Dates Optimized'[Month] ),
+			            VAR ___f =
+			                FILTERS ( 'Dates Optimized'[Month] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, 'Dates Optimized'[Month] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, 'Dates Optimized'[Month], ", " )
+			            VAR ___x =
+			                "'Dates Optimized'[Month] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( 'Dates Optimized'[Month Name] ),
+			            VAR ___f =
+			                FILTERS ( 'Dates Optimized'[Month Name] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, 'Dates Optimized'[Month Name] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, 'Dates Optimized'[Month Name], ", " )
+			            VAR ___x =
+			                "'Dates Optimized'[Month Name] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( 'Dates Optimized'[Month Name Full] ),
+			            VAR ___f =
+			                FILTERS ( 'Dates Optimized'[Month Name Full] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, 'Dates Optimized'[Month Name Full] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, 'Dates Optimized'[Month Name Full], ", " )
+			            VAR ___x =
+			                "'Dates Optimized'[Month Name Full] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( 'Dates Optimized'[Quarter] ),
+			            VAR ___f =
+			                FILTERS ( 'Dates Optimized'[Quarter] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, 'Dates Optimized'[Quarter] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, 'Dates Optimized'[Quarter], ", " )
+			            VAR ___x =
+			                "'Dates Optimized'[Quarter] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( 'Dates Optimized'[Year] ),
+			            VAR ___f =
+			                FILTERS ( 'Dates Optimized'[Year] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, 'Dates Optimized'[Year] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, 'Dates Optimized'[Year], ", " )
+			            VAR ___x =
+			                "'Dates Optimized'[Year] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( 'Dates Optimized'[YearMonthKey] ),
+			            VAR ___f =
+			                FILTERS ( 'Dates Optimized'[YearMonthKey] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, 'Dates Optimized'[YearMonthKey] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, 'Dates Optimized'[YearMonthKey], ", " )
+			            VAR ___x =
+			                "'Dates Optimized'[YearMonthKey] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[COGS] ),
+			            VAR ___f =
+			                FILTERS ( financials[COGS] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[COGS] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[COGS], ", " )
+			            VAR ___x =
+			                "financials[COGS] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[Country] ),
+			            VAR ___f =
+			                FILTERS ( financials[Country] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[Country] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[Country], ", " )
+			            VAR ___x =
+			                "financials[Country] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[Date] ),
+			            VAR ___f =
+			                FILTERS ( financials[Date] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[Date] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[Date], ", " )
+			            VAR ___x =
+			                "financials[Date] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[Discount Band] ),
+			            VAR ___f =
+			                FILTERS ( financials[Discount Band] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[Discount Band] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[Discount Band], ", " )
+			            VAR ___x =
+			                "financials[Discount Band] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[Discounts] ),
+			            VAR ___f =
+			                FILTERS ( financials[Discounts] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[Discounts] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[Discounts], ", " )
+			            VAR ___x =
+			                "financials[Discounts] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[Gross Sales] ),
+			            VAR ___f =
+			                FILTERS ( financials[Gross Sales] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[Gross Sales] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[Gross Sales], ", " )
+			            VAR ___x =
+			                "financials[Gross Sales] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[Manufacturing Price] ),
+			            VAR ___f =
+			                FILTERS ( financials[Manufacturing Price] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[Manufacturing Price] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[Manufacturing Price], ", " )
+			            VAR ___x =
+			                "financials[Manufacturing Price] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[Month Name] ),
+			            VAR ___f =
+			                FILTERS ( financials[Month Name] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[Month Name] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[Month Name], ", " )
+			            VAR ___x =
+			                "financials[Month Name] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[Month Number] ),
+			            VAR ___f =
+			                FILTERS ( financials[Month Number] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[Month Number] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[Month Number], ", " )
+			            VAR ___x =
+			                "financials[Month Number] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[Product] ),
+			            VAR ___f =
+			                FILTERS ( financials[Product] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[Product] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[Product], ", " )
+			            VAR ___x =
+			                "financials[Product] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[Profit] ),
+			            VAR ___f =
+			                FILTERS ( financials[Profit] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[Profit] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[Profit], ", " )
+			            VAR ___x =
+			                "financials[Profit] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[Sale Price] ),
+			            VAR ___f =
+			                FILTERS ( financials[Sale Price] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[Sale Price] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[Sale Price], ", " )
+			            VAR ___x =
+			                "financials[Sale Price] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[Sales] ),
+			            VAR ___f =
+			                FILTERS ( financials[Sales] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[Sales] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[Sales], ", " )
+			            VAR ___x =
+			                "financials[Sales] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[Segment] ),
+			            VAR ___f =
+			                FILTERS ( financials[Segment] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[Segment] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[Segment], ", " )
+			            VAR ___x =
+			                "financials[Segment] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[Units Sold] ),
+			            VAR ___f =
+			                FILTERS ( financials[Units Sold] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[Units Sold] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[Units Sold], ", " )
+			            VAR ___x =
+			                "financials[Units Sold] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( financials[Year] ),
+			            VAR ___f =
+			                FILTERS ( financials[Year] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, financials[Year] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, financials[Year], ", " )
+			            VAR ___x =
+			                "financials[Year] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
+			        & IF (
+			            ISFILTERED ( Model_Measures[Value] ),
+			            VAR ___f =
+			                FILTERS ( Model_Measures[Value] )
+			            VAR ___r =
+			                COUNTROWS ( ___f )
+			            VAR ___t =
+			                TOPN ( MaxFilters, ___f, Model_Measures[Value] )
+			            VAR ___d =
+			                CONCATENATEX ( ___t, Model_Measures[Value], ", " )
+			            VAR ___x =
+			                "Model_Measures[Value] = " & ___d
+			                    & IF ( ___r > MaxFilters, ", ... [" & ___r & " items selected]" ) & " "
+			            RETURN
+			                ___x & UNICHAR ( 13 ) & UNICHAR ( 10 )
+			        )
 			---- MODEL MEASURES END ----
-			
-			
-			```
 		displayFolder: other measures
 		lineageTag: 62b58e6e-2bda-420d-afcb-07cc274f3696
 
